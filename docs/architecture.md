@@ -1,4 +1,54 @@
-# 基本設計 2013.07.06
+# 基本設計
+
+## 2013.07.06.v2
+```
+.
+|-- README.md
+|-- System
+|   |-- Config.py
+|   |-- Logger.py
+|   `-- __init__.py
+|-- app.py
+|-- asset
+|   |-- __init__.py
+|   `-- serif.py
+|-- cli
+|   `-- app.sh
+|-- docs
+|   |-- architecture.md
+|   |-- docs.md
+|   `-- src
+|       |-- css
+|       |-- img
+|       |   `-- hisyotan.jpg
+|       `-- js
+|-- lib
+|   |-- __init__.py
+|   |-- twitter
+|   |   |-- __init__.py
+|   |   |-- bot.py
+|   |   `-- oauth
+|   |       `-- __init__.py
+|   `-- util.py
+|-- log
+|-- skel
+|   |-- __init__.py
+|   |-- filter
+|   |   `-- __init__.py
+|   |-- interpreter
+|   |   `-- __init__.py
+|   |-- procedure
+|   |   `-- __init__.py
+|   `-- response
+|       `-- __init__.py
+`-- test
+    `-- runner.sh
+
+18 directories, 22 files
+```
+
+-------------
+## 2013.07.06
 - cli
     - app.sh コマンドラインからのパラメータを扱う
 - app.py メインプロセスを提供する。skelから秘書たんを生成し、起動させる。
