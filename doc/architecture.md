@@ -14,7 +14,7 @@
 |   `-- serif.py
 |-- cli
 |   `-- app.sh
-|-- docs
+|-- doc
 |   |-- architecture.md
 |   |-- docs.md
 |   `-- src
