@@ -21,7 +21,7 @@ case $1 in
     if [ $# -lt 2 ]; then
       python -B $PWD/app.py
     elif [ "$2" = "d" ]; then
-      nohup python -B $PWD/app.py >> $log_path &
+      nohup python $PWD/app.py >> $log_path &
     else
       print_help
     fi
