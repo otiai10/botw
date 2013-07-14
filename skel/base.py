@@ -45,7 +45,7 @@ class Skel:
       if 0 < len(timeline):
         last_got_id = timeline[0].id
 
-      time.sleep(65)
+      time.sleep(120)
       # if some trigger:
       #   break
 
