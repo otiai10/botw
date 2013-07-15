@@ -1,8 +1,10 @@
 
+
 class Echo:
   @classmethod
-  def process(self, resource, params):
+  def process(self, resource, args):
     # {{{ replace ??? or any processing
-    text = resource + params['text_given'] + ' hoge---- '
+    text = '@' + args['user'].screen_name + ' '
+    text += resource.replace('%{text_given}', args['text_given'])
     # }}}
     return text

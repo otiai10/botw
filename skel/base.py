@@ -25,7 +25,7 @@ class Skel:
     itr_count = 0
 
     while True:
-      print "\n\n\n\n============= %i TRY =============" % itr_count
+      print "\n\n============= %i TRY =============" % itr_count
       print 'last_got_id is ', last_got_id, '...'
 
       timeline = api.GetHomeTimeline(since_id=last_got_id)
@@ -94,7 +94,7 @@ class Skel:
 
   def dispatch_action(self, args):
     if args['action'] == 'update_status':
-      api.PostUpdate(args['message'])
+      api.PostUpdate(args['message'], in_reply_to_status_id=args['origin'].id)
     else:
       pass
     return 'DISPATCHED SUCCESSFULLY'

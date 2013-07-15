@@ -18,5 +18,6 @@ class Echo:
     self.__msg_args = {
       'action' : 'update_status',
       'message': serif,
+      'origin' : args['origin'],
     }
     return self.__msg_args
