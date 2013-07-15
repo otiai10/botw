@@ -1,7 +1,4 @@
 import twitter
-# {{{ for debug
-from datetime import *
-# }}}
 import time
 
 from interpreter import Interpreter
@@ -93,13 +90,10 @@ class Skel:
     cls_name = res['resp']['class']
     mod = __import__('.'.join(['response',mod_name]),globals(),locals(),[cls_name], -1)
     Resp = getattr(mod, cls_name)
-    return Resp.generate(res['args'])
+    return Resp().generate(res['args'])
 
   def dispatch_action(self, args):
-    # {{{ for debug
-    timestamp = time.mktime(datetime.now().timetuple())
-    # }}}
     if args['action'] == 'update_status':
-      api.PostUpdate(args['message'] + ' and TS is ' + str(timestamp))
+      api.PostUpdate(args['message'])
     else:
       pass
