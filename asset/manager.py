@@ -47,7 +47,3 @@ class Asset:
   def embed_debug_ts(self):
     timestamp = time.mktime(datetime.now().timetuple())
     self.__text += ' and TS is ' + str(timestamp)
-
-#if __name__ == '__main__':
-#  a = Asset('serif')
-#  print a.load('test','Echo').apply({'text_given':'ggggggggggggggg'}).get_text()

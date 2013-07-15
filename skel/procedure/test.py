@@ -7,7 +7,6 @@ class Echo:
   }
   @classmethod
   def perform(self, context):
-    print __file__
     self.__response['resp']['module'] = 'test'
     self.__response['resp']['class']  = 'Echo'
     self.__response['args'] = {
@@ -31,6 +30,4 @@ class Trigger:
       'user'         : context['user'],
       'origin'       : context['origin'],
     }
-
-    print self.__response, __file__
     return self.__response

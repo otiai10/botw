@@ -14,19 +14,15 @@ class Interpreter:
 
   def execute(self):
     if self.tweet.in_reply_to_screen_name == conf.bot_name:
-      if True:
-        self.__context['proc']   = {'module':'test','class':'Echo'}
-        self.__context['params'] = {
-          'text_given' : self.tweet.text.replace(conf.at_bot_name,''),
-        }
+      self.dispatch_reply_to_me()
+      pass
     elif self.tweet.in_reply_to_screen_name is not None:
-      # print 'REPLY TO OTHER USER'
-      # ignore
       pass
     elif self.contain_trigger_word():
       pass
     else:
       self.__context['proc'] = None
+      pass
 
     self.__context['params']['user'] = {
       'screen_name' : self.tweet.user.screen_name,
@@ -39,7 +35,7 @@ class Interpreter:
   def contain_trigger_word(self):
     triggers = Asset('trigger').get_dict()
     for k,proc in triggers.items():
-      if re.match(k, self.tweet.text):
+      if re.search(k, self.tweet.text):
         self.__context['proc'] = triggers[k]
         self.__context['params'] = {
           'trigger_word' : k,
@@ -47,4 +43,19 @@ class Interpreter:
         return True
       else:
         self.__context['proc'] = None
+    return False
+
+  def dispatch_reply_to_me(self):
+    commands = Asset('command').get_dict()
+    for c,proc in commands.items():
+      if re.search(c, self.tweet.text):
+        self.__context['proc'] = commands[c]
+        self.__context['params'] = {
+          'command' : c,
+        }
+      else:
+        self.__context['proc']   = {'module':'test','class':'Echo'}
+        self.__context['params'] = {
+          'text_given' : self.tweet.text.replace(conf.at_bot_name,''),
+        }
     return False

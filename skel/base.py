@@ -25,26 +25,17 @@ class Skel:
     itr_count = 0
 
     while True:
-      print "\n\n============= %i TRY =============" % itr_count
+      print "\n============= %i TRY =============" % itr_count
       print 'last_got_id is ', last_got_id, '...'
-
       timeline = api.GetHomeTimeline(since_id=last_got_id)
       timeline.reverse()
       for tweet in timeline:
-        #try:
         self.tweet_by_tweet(tweet)
-        #except Exception as e:
-        #  print 'EXCEPTION raised ->'
-        #  print e.message
-        #  pass # log
       itr_count += 1
       timeline.reverse()
       if 0 < len(timeline):
         last_got_id = timeline[0].id
-
-      time.sleep(120)
-      # if some trigger:
-      #   break
+      time.sleep(65)
 
   # core function
   def tweet_by_tweet(self, tweet):
@@ -64,7 +55,6 @@ class Skel:
       # do nothing
       return None
     result = self.dispatch_action(msg_args)
-    print result , __file__
     return None
 
   def pass_this_tw(self, tweet):
