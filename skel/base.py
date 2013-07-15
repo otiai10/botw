@@ -64,7 +64,7 @@ class Skel:
       # do nothing
       return None
     result = self.dispatch_action(msg_args)
-    print result
+    print result , __file__
     return None
 
   def pass_this_tw(self, tweet):
@@ -97,3 +97,4 @@ class Skel:
       api.PostUpdate(args['message'])
     else:
       pass
+    return 'DISPATCHED SUCCESSFULLY'

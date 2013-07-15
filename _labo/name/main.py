@@ -1,3 +1,5 @@
+from os.path import *
+from system import conf
 
 class Echo:
 
@@ -10,6 +12,10 @@ class Echo:
     print self.__class__.__name__
 
     print __file__.split('/')[-1].split('.')[0]
+
+    print dirname(dirname(__file__))
+
+    print 'app_root ', conf.app_root
 
 if __name__ == '__main__':
   c = Echo('hoge')
