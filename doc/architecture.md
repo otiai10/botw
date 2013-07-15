@@ -1,5 +1,61 @@
 # 基本設計
 
+## 2013.07.15
+```
+.
+|-- README.md
+|-- _labo
+|   |-- mongo
+|   |   |-- minimum.py
+|   |   `-- system -> ../../system
+|   |-- name
+|   |   |-- main.py
+|   |   `-- system -> ../../system
+|   `-- twitter
+|       |-- minimum.py
+|       `-- system -> ../../system
+|-- app.py
+|-- asset
+|   |-- __init__.py
+|   |-- manager.py
+|   |-- processor
+|   |   |-- __init__.py
+|   |   `-- serif
+|   |       |-- __init__.py
+|   |       `-- test.py
+|   `-- resource
+|       `-- serif
+|           `-- test.json
+|-- cli
+|   `-- app.sh
+|-- doc
+|   |-- architecture.md
+|   `-- src
+|       `-- img
+|           `-- hisyotan.jpg
+|-- log
+|   `-- 2013.0714.log
+|-- skel
+|   |-- __init__.py
+|   |-- base.py
+|   |-- filters.py
+|   |-- interpreter.py
+|   |-- procedure
+|   |   |-- __init__.py
+|   |   `-- test.py
+|   `-- response
+|       |-- __init__.py
+|       `-- test.py
+`-- system
+    |-- __init__.py
+    |-- conf.py
+    |-- conf.sample.py
+    |-- logger.py
+    `-- util.py
+
+21 directories, 28 files
+```
+
 ## 2013.07.06.v2
 ```
 .
