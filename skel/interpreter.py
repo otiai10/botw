@@ -53,6 +53,7 @@ class Interpreter:
         self.__context['params'] = {
           'command' : c,
         }
+        return True
       else:
         self.__context['proc']   = {'module':'test','class':'Echo'}
         self.__context['params'] = {

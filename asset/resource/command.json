@@ -1,3 +1,4 @@
 {
-  "--help" : {"module":"common","class":"Help"}
+  "--help" : {"module":"common","class":"Help"},
+  "--list" : {"module":"task",  "class":"List"}
 }
