@@ -1,5 +1,5 @@
 from datetime import *
-import time, json
+import time, json, random
 
 from system import conf
 
@@ -19,7 +19,7 @@ class Asset:
     resource_file = conf.app_root + '/asset/resource/serif/' + category.lower() + '.json'
     with open(resource_file, 'r') as f:
       pool = json.load(f)
-    self.__loaded_rsrc = pool[key]
+    self.__loaded_rsrc = random.choice(pool[key])
 
     self.__category = category
     self.__key      = key
