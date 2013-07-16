@@ -4,8 +4,13 @@ from system import conf
 client = MongoClient(conf.mongo['host'],conf.mongo['port'])
 
 db = client.test
-collection = db.hoge
+#collection = db.hoge
+collection = db.masters
 
+for m in collection.find():
+  print m
+
+'''
 def find_all_test():
   print 'found >>>'
   for m in collection.find():
@@ -68,3 +73,4 @@ if __name__ == '__main__':
 
   # find by condition
   find_with_condition_test({'is_my_wife':True})
+'''
