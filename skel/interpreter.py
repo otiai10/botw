@@ -17,6 +17,7 @@ class Interpreter:
       self.dispatch_reply_to_me()
       pass
     elif self.tweet.in_reply_to_screen_name is not None:
+      self.__context['proc'] = None
       pass
     elif self.contain_trigger_word():
       pass

@@ -67,6 +67,7 @@ class Skel:
     return False
 
   def interpret_this_tw(self,tweet):
+    print tweet.text.encode('utf8')
     return Interpreter(tweet).execute()
 
   def proc_this_context(self, context):

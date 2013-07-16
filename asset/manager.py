@@ -27,7 +27,7 @@ class Asset:
     return self
 
   def apply(self, params):
-    #if self.__resource_type == 'serif':
+    # """ if self.__resource_type == 'serif': """
     mod = __import__('processor.serif.' + self.__category ,globals(),locals,[self.__key],-1)
     Prcsr = getattr(mod, self.__key)
     self._text = Prcsr.process(self.__loaded_rsrc, params)
@@ -36,9 +36,9 @@ class Asset:
   def get_text(self, opt=None):
     if not hasattr(self, '_text'):
       self._text = self.__loaded_rsrc
-    # {{{ debug
+    # """ debug
     self.embed_debug_ts()
-    # }}}
+    # """
     return self._text
 
   def get_dict(self, opt=None):
