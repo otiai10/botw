@@ -55,6 +55,7 @@ class Skel:
       # do nothing
       return None
     result = self.dispatch_action(msg_args)
+    print result
     return None
 
   def pass_this_tw(self, tweet):

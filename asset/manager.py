@@ -30,14 +30,16 @@ class Asset:
     #if self.__resource_type == 'serif':
     mod = __import__('processor.serif.' + self.__category ,globals(),locals,[self.__key],-1)
     Prcsr = getattr(mod, self.__key)
-    self.__text = Prcsr.process(self.__loaded_rsrc, params)
+    self._text = Prcsr.process(self.__loaded_rsrc, params)
     return self
 
   def get_text(self, opt=None):
+    if not hasattr(self, '_text'):
+      self._text = self.__loaded_rsrc
     # {{{ debug
     self.embed_debug_ts()
     # }}}
-    return self.__text
+    return self._text
 
   def get_dict(self, opt=None):
     resource_file = conf.app_root + '/asset/resource/' + self.__resource_type + '.json'
@@ -46,4 +48,4 @@ class Asset:
  
   def embed_debug_ts(self):
     timestamp = time.mktime(datetime.now().timetuple())
-    self.__text += ' and TS is ' + str(timestamp)
+    self._text += ' and TS is ' + str(timestamp)
