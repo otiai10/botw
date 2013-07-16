@@ -1,5 +1,12 @@
 {
   "--help" : {"module":"common","class":"Help"},
+
   "--list" : {"module":"task",  "class":"List"},
-  "--done" : {"module":"task",  "class":"Done"}
+  "./"     : {"module":"task",  "class":"List"},
+
+  "--done" : {"module":"task",  "class":"Done"},
+  "/_"     : {"module":"task",  "class":"Done"},
+
+  "--add " : {"module":"task",  "class":"Add" },
+  "/&"     : {"module":"task",  "class":"Add" }
 }
