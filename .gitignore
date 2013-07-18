@@ -1,3 +1,5 @@
 *.pyc
 system/conf.py
 log/*
+twitter/*
+_labo/twitter.update/twitter/*

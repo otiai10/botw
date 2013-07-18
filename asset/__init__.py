@@ -1,1 +1,1 @@
-from manager import Asset
+from asset.manager import Asset

@@ -1,15 +1,21 @@
-import twitter
+from twitter import *
 import time
 
-from interpreter import Interpreter
+from skel.interpreter import Interpreter
 from system import *
 
-api = twitter.Api(
-  consumer_key        = conf.consumer_key,
-  consumer_secret     = conf.consumer_secret,
-  access_token_key    = conf.access_token_key,
-  access_token_secret = conf.access_token_secret,
-)
+#api = twitter.Api(
+#  consumer_key        = conf.consumer_key,
+#  consumer_secret     = conf.consumer_secret,
+#  access_token_key    = conf.access_token_key,
+#  access_token_secret = conf.access_token_secret,
+#)
+strm = TwitterStream(auth=OAuth(
+  conf.access_token_key,
+  conf.access_token_secret,
+  conf.consumer_key,
+  conf.consumer_secret
+))
 
 class Skel:
 
@@ -24,18 +30,23 @@ class Skel:
     last_got_id = None
     itr_count = 0
 
-    while True:
-      print "\n============= %i TRY =============" % itr_count
-      print 'last_got_id is ', last_got_id, '...'
-      timeline = api.GetHomeTimeline(since_id=last_got_id)
-      timeline.reverse()
-      for tweet in timeline:
-        self.tweet_by_tweet(tweet)
-      itr_count += 1
-      timeline.reverse()
-      if 0 < len(timeline):
-        last_got_id = timeline[0].id
-      time.sleep(65)
+    #while True:
+    #  print("\n============= %i TRY =============" % itr_count)
+    #  print('last_got_id is ', last_got_id, '...')
+    #  timeline = api.GetHomeTimeline(since_id=last_got_id)
+    #  timeline.reverse()
+    #  for tweet in timeline:
+    #    self.tweet_by_tweet(tweet)
+    #  itr_count += 1
+    #  timeline.reverse()
+    #  if 0 < len(timeline):
+    #    last_got_id = timeline[0].id
+    #  time.sleep(65)
+    bot = dict(screen_name=conf.bot_name)
+    tl = strm.user(**bot)
+    for t in tl:
+      tw = util.convert_twitter_format(t)
+      self.tweet_by_tweet(tw)
 
   # core function
   def tweet_by_tweet(self, tweet):
@@ -55,11 +66,11 @@ class Skel:
       # do nothing
       return None
     result = self.dispatch_action(msg_args)
-    print result
+    print(result)
     return None
 
   def pass_this_tw(self, tweet):
-    mod = __import__('filters',globals(),locals(), self.__filters, -1)
+    mod = __import__('skel.filters',globals(),locals(), self.__filters)
     for f in self.__filters:
       Fltr = getattr(mod, f)
       if Fltr.accept(tweet) is False:
@@ -67,20 +78,20 @@ class Skel:
     return False
 
   def interpret_this_tw(self,tweet):
-    print tweet.text.encode('utf8')
+    print(tweet.text.encode('utf8'))
     return Interpreter(tweet).execute()
 
   def proc_this_context(self, context):
     mod_name = context['proc']['module']
     cls_name = context['proc']['class']
-    mod = __import__('.'.join(['procedure',mod_name]),globals(),locals(),[cls_name], -1)
+    mod = __import__('.'.join(['skel','procedure',mod_name]),globals(),locals(),[cls_name], -1)
     Proc = getattr(mod, cls_name)
     return Proc.perform(context['params'])
 
   def generate_reply_message(self, res):
     mod_name = res['resp']['module']
     cls_name = res['resp']['class']
-    mod = __import__('.'.join(['response',mod_name]),globals(),locals(),[cls_name], -1)
+    mod = __import__('.'.join(['skel','response',mod_name]),globals(),locals(),[cls_name], -1)
     Resp = getattr(mod, cls_name)
     return Resp().generate(res['args'])
 
