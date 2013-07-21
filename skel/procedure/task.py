@@ -81,7 +81,6 @@ class Add:
         },
         'command'   : context['command'],
       }
-      print(self.__response)
     else:
       # TODO: DRY
       self.__response['resp']['module'] = 'common'

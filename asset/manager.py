@@ -17,7 +17,7 @@ class Asset:
   def load(self, category, key):
     pool = {}
     resource_file = conf.app_root + '/asset/resource/serif/' + category.lower() + '.json'
-    with open(resource_file, 'r') as f:
+    with open(resource_file, 'r',  encoding='utf8') as f:
       pool = json.load(f)
     self.__loaded_rsrc = random.choice(pool[key])
 
@@ -28,7 +28,7 @@ class Asset:
 
   def apply(self, params):
     # """ if self.__resource_type == 'serif': """
-    mod = __import__('processor.serif.' + self.__category ,globals(),locals,[self.__key],-1)
+    mod = __import__('asset.processor.serif.' + self.__category ,globals(),locals,[self.__key])
     Prcsr = getattr(mod, self.__key)
     self._text = Prcsr.process(self.__loaded_rsrc, params)
     return self

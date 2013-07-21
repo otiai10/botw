@@ -4,12 +4,12 @@ import time
 from skel.interpreter import Interpreter
 from system import *
 
-#api = twitter.Api(
-#  consumer_key        = conf.consumer_key,
-#  consumer_secret     = conf.consumer_secret,
-#  access_token_key    = conf.access_token_key,
-#  access_token_secret = conf.access_token_secret,
-#)
+rest = Twitter(auth=OAuth(
+  conf.access_token_key,
+  conf.access_token_secret,
+  conf.consumer_key,
+  conf.consumer_secret
+))
 strm = TwitterStream(auth=OAuth(
   conf.access_token_key,
   conf.access_token_secret,
@@ -30,22 +30,12 @@ class Skel:
     last_got_id = None
     itr_count = 0
 
-    #while True:
-    #  print("\n============= %i TRY =============" % itr_count)
-    #  print('last_got_id is ', last_got_id, '...')
-    #  timeline = api.GetHomeTimeline(since_id=last_got_id)
-    #  timeline.reverse()
-    #  for tweet in timeline:
-    #    self.tweet_by_tweet(tweet)
-    #  itr_count += 1
-    #  timeline.reverse()
-    #  if 0 < len(timeline):
-    #    last_got_id = timeline[0].id
-    #  time.sleep(65)
     bot = dict(screen_name=conf.bot_name)
     tl = strm.user(**bot)
     for t in tl:
       tw = util.convert_twitter_format(t)
+      if tw['friends'] is not None:
+        continue
       self.tweet_by_tweet(tw)
 
   # core function
@@ -78,26 +68,26 @@ class Skel:
     return False
 
   def interpret_this_tw(self,tweet):
-    print(tweet.text.encode('utf8'))
     return Interpreter(tweet).execute()
 
   def proc_this_context(self, context):
     mod_name = context['proc']['module']
     cls_name = context['proc']['class']
-    mod = __import__('.'.join(['skel','procedure',mod_name]),globals(),locals(),[cls_name], -1)
+    mod = __import__('.'.join(['skel','procedure',mod_name]),globals(),locals(),[cls_name])
     Proc = getattr(mod, cls_name)
     return Proc.perform(context['params'])
 
   def generate_reply_message(self, res):
     mod_name = res['resp']['module']
     cls_name = res['resp']['class']
-    mod = __import__('.'.join(['skel','response',mod_name]),globals(),locals(),[cls_name], -1)
+    mod = __import__('.'.join(['skel','response',mod_name]),globals(),locals(),[cls_name])
     Resp = getattr(mod, cls_name)
     return Resp().generate(res['args'])
 
   def dispatch_action(self, args):
     if args['action'] == 'update_status':
-      api.PostUpdate(args['message'], in_reply_to_status_id=args['origin'].id)
+      # rest.statuses.update(args['message'], in_reply_to_status_id=args['origin'].id)
+      rest.statuses.update(status=args['message'], in_reply_to_status_id=args['origin']['id'])
     else:
       pass
     return 'DISPATCHED SUCCESSFULLY'
