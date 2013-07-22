@@ -10,7 +10,6 @@ def rebuild_tasks(cur, given):
   done_list     = []
   notfound_list = []
   for gv in given:
-    gv = gv.decode('utf8')
     if gv in cur:
       done_list.append(gv)
       while cur.count(gv):
@@ -28,21 +27,27 @@ class List:
   def perform(self, context):
 
     master = collection.find({'name':context['user']['screen_name']})
-    # print dir(master)
     if master.count() is 1:
       m = master[0]
-      tasks_str = ','.join(m['tasks']).encode('utf8')
-      # TODO: DRY
-      self.__response['resp']['module'] = 'task'
-      self.__response['resp']['class']  = 'List'
-      self.__response['args'] = {
-        'user'      : context['user'],
-        'origin'    : context['origin'],
-        'tasks_str' : tasks_str,
-        'command'   : context['command'],
-      }
+      if len(m['tasks']) == 0:
+        self.__response['resp']['module'] = 'task'
+        self.__response['resp']['class']  = 'Empty'
+        self.__response['args'] = {
+          'user'      : context['user'],
+          'origin'    : context['origin'],
+          'command'   : context['command'],
+        }
+      else: 
+        tasks_str = ','.join(m['tasks'])
+        self.__response['resp']['module'] = 'task'
+        self.__response['resp']['class']  = 'List'
+        self.__response['args'] = {
+          'user'      : context['user'],
+          'origin'    : context['origin'],
+          'tasks_str' : tasks_str,
+          'command'   : context['command'],
+        }
     else:
-      # TODO: DRY
       self.__response['resp']['module'] = 'common'
       self.__response['resp']['class']  = 'Help'
       self.__response['args'] = {
@@ -64,10 +69,14 @@ class Add:
     if master.count() is 1:
       m = master[0]
       old = m['tasks']
-      added = context['origin'].text.encode('utf8').split(' ')
+      added = context['origin']['text'].split(' ')
       added.remove(conf.at_bot_name)
-      added.remove(cgi.escape(context['command']))
+      added.remove(context['command'].strip())
       cur = old + added
+
+      m['tasks'] = cur
+      collection.save(m)
+
       # TODO: DRY
       self.__response['resp']['module'] = 'task'
       self.__response['resp']['class']  = 'Add'
@@ -76,7 +85,7 @@ class Add:
         'origin'    : context['origin'],
         'tasks'     : {
           'added'    : { 'list' : added, 'str' : ','.join(added) },
-          'old'      : { 'list' : old,   'str' : ','.join(old).encode('utf8')  },
+          'old'      : { 'list' : old,   'str' : ','.join(old)  },
           'current'  : { 'list' : cur,   'str' : ','.join(cur)  },
         },
         'command'   : context['command'],
@@ -102,9 +111,9 @@ class Done:
     master = collection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
-      tasks_from_text = context['origin'].text.encode('utf8').split(' ')
+      tasks_from_text = context['origin']['text'].split(' ')
       tasks_from_text.remove(conf.at_bot_name)
-      tasks_from_text.remove(context['command'])
+      tasks_from_text.remove(context['command'].strip())
       (done, notfound, new) = rebuild_tasks(m['tasks'], tasks_from_text)
 
       # update record
@@ -118,9 +127,9 @@ class Done:
         'user'      : context['user'],
         'origin'    : context['origin'],
         'tasks'     : {
-          'done'     : { 'list' : done,     'str' : ','.join(done).encode('utf8')     },
-          'notfound' : { 'list' : notfound, 'str' : ','.join(notfound).encode('utf8') },
-          'new'      : { 'list' : new,      'str' : ','.join(new).encode('utf8')      },
+          'done'     : { 'list' : done,     'str' : ','.join(done)     },
+          'notfound' : { 'list' : notfound, 'str' : ','.join(notfound) },
+          'new'      : { 'list' : new,      'str' : ','.join(new)      },
         },
         'command'   : context['command'],
       }

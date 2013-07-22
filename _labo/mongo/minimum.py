@@ -8,7 +8,7 @@ db = client.test
 collection = db.masters
 
 for m in collection.find():
-  print m
+  print(m)
 
 '''
 def find_all_test():
