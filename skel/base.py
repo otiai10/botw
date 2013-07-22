@@ -1,5 +1,5 @@
 from twitter import *
-import time
+import time, smtplib
 
 from skel.interpreter import Interpreter
 from system import *
@@ -36,7 +36,10 @@ class Skel:
       tw = util.convert_twitter_format(t)
       if tw['friends'] is not None:
         continue
-      self.tweet_by_tweet(tw)
+      try:
+        self.tweet_by_tweet(tw)
+      except Exception as err:
+        Alert(e=err,twtxt=tw['text']).send_mail()
 
   # core function
   def tweet_by_tweet(self, tweet):
