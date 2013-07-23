@@ -44,21 +44,23 @@ class Skel:
   # core function
   def tweet_by_tweet(self, tweet):
     if self.pass_this_tw(tweet):
-      # ignore this
       return None
     context = self.interpret_this_tw(tweet)
+    _executed = {}
     if context['proc'] is None:
-      # ignore this
       return None
     res = self.proc_this_context(context)
+    _executed['Procedure'] = context['proc']
     if res['resp'] is None:
-      # do not reply
       return None
     msg_args = self.generate_reply_message(res)
-    if msg_args['action'] is None:
-      # do nothing
+    # TODO : if len(msg_args['actions']) is 0:
+    _executed['Response'] = res['resp']
+    if msg_args['actions'] is None or len(msg_args['actions']) is 0:
       return None
     result = self.dispatch_action(msg_args)
+    _executed['Actions'] = result
+    print({'EXECUTED':_executed})
     return None
 
   def pass_this_tw(self, tweet):
@@ -87,9 +89,11 @@ class Skel:
     return Resp().generate(res['args'])
 
   def dispatch_action(self, args):
-    if args['action'] == 'update_status':
-      # rest.statuses.update(args['message'], in_reply_to_status_id=args['origin'].id)
+    _finally = []
+    if 'update_status' in args['actions'] and args['message'] is not None:
       rest.statuses.update(status=args['message'], in_reply_to_status_id=args['origin']['id'])
-    else:
+      _finally.append('update_status')
+    if 'friendships_create' in args['actions'] and args['tw_id'] is not None:
+      _finally.append('friendships_create')
       pass
-    return 'DISPATCHED SUCCESSFULLY'
+    return _finally

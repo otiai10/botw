@@ -17,7 +17,7 @@ class Create:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'action' : 'update_status',
+      'actions' : ['update_status'],
       'message': serif,
       'origin' : args['origin'],
     }
@@ -40,7 +40,7 @@ class AlreadyCreated:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'action' : 'update_status',
+      'actions' : ['update_status'],
       'message': serif,
       'origin' : args['origin'],
     }
@@ -63,7 +63,7 @@ class Destroy:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'action' : 'update_status',
+      'actions' : ['update_status'],
       'message': serif,
       'origin' : args['origin'],
     }

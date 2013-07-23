@@ -17,9 +17,9 @@ class List:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'action' : 'update_status',
-      'message': serif,
-      'origin' : args['origin'],
+      'actions' : ['update_status'],
+      'message' : serif,
+      'origin'  : args['origin'],
     }
 
     return self.__msg_args
@@ -40,9 +40,9 @@ class Empty:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'action' : 'update_status',
-      'message': serif,
-      'origin' : args['origin'],
+      'actions' : ['update_status'],
+      'message' : serif,
+      'origin'  : args['origin'],
     }
 
     return self.__msg_args
@@ -62,9 +62,9 @@ class Add:
       self.__serif_key
     ).apply(args).get_text()
     self.__msg_args = {
-      'action' : 'update_status',
-      'message': serif,
-      'origin' : args['origin'],
+      'actions' : ['update_status'],
+      'message' : serif,
+      'origin'  : args['origin'],
     }
     return self.__msg_args
 
@@ -81,7 +81,7 @@ class Done:
 
     # """ nothing """
     if len(args['tasks']['done']['list']) is 0 and len(args['tasks']['notfound']['list']) is 0:
-      self.__msg_args['action'] = None
+      self.__msg_args['actions'] = []
       self.__msg_args['origin'] = args['origin']
       return self.__msg_args
 
@@ -92,9 +92,9 @@ class Done:
         'Notfound_Without_Done'
       ).apply(args).get_text()
       self.__msg_args = {
-        'action' : 'update_status',
-        'message': serif,
-        'origin' : args['origin'],
+        'actions' : ['update_status'],
+        'message' : serif,
+        'origin'  : args['origin'],
       }
       return self.__msg_args
 
@@ -105,9 +105,9 @@ class Done:
         'Complete'
       ).apply(args).get_text()
       self.__msg_args = {
-        'action' : 'update_status',
-        'message': serif,
-        'origin' : args['origin'],
+        'actions' : ['update_status'],
+        'message' : serif,
+        'origin'  : args['origin'],
       }
       return self.__msg_args
 
@@ -118,9 +118,9 @@ class Done:
         'Done'
       ).apply(args).get_text()
       self.__msg_args = {
-        'action' : 'update_status',
-        'message': serif,
-        'origin' : args['origin'],
+        'actions' : ['update_status'],
+        'message' : serif,
+        'origin'  : args['origin'],
       }
       return self.__msg_args
 
@@ -130,8 +130,8 @@ class Done:
       'Done_With_Notfound'
     ).apply(args).get_text()
     self.__msg_args = {
-      'action' : 'update_status',
-      'message': serif,
-      'origin' : args['origin'],
+      'actions' : ['update_status'],
+      'message' : serif,
+      'origin'  : args['origin'],
     }
     return self.__msg_args
