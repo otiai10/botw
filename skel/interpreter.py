@@ -27,6 +27,7 @@ class Interpreter:
 
     self.__context['params']['user'] = {
       'screen_name' : self.tweet['user']['screen_name'],
+      'tw_id'       : self.tweet['user']['id'],
       # add another attributes if needed
     }
     self.__context['params']['origin'] = self.tweet # TODO : remove unnecessary field
