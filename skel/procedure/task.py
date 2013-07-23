@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 from system import conf
-import cgi
 
 client = MongoClient(conf.mongo['host'],conf.mongo['port'])
 db = client.test

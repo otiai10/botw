@@ -8,5 +8,8 @@
   "/_"     : {"module":"task",  "class":"Done"},
 
   "--add " : {"module":"task",  "class":"Add" },
-  "/&"     : {"module":"task",  "class":"Add" }
+  "/&"     : {"module":"task",  "class":"Add" },
+
+  "--hello-hisyotan" : {"module":"relation", "class":"Create"},
+  "--byebye"         : {"module":"relation", "class":"Destroy"}
 }
