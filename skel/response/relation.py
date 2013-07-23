@@ -17,8 +17,12 @@ class Create:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'actions' : ['update_status'],
+      'actions' : [
+        'update_status',
+        'friendships_create',
+      ],
       'message': serif,
+      'tw_id'  : args['user']['tw_id'],
       'origin' : args['origin'],
     }
 
@@ -40,8 +44,12 @@ class AlreadyCreated:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'actions' : ['update_status'],
+      'actions' : [
+        'update_status',
+        'friendships_create',
+      ],
       'message': serif,
+      'tw_id'  : args['user']['tw_id'],
       'origin' : args['origin'],
     }
 
@@ -63,8 +71,12 @@ class Destroy:
     ).apply(args).get_text()
 
     self.__msg_args = {
-      'actions' : ['update_status'],
+      'actions' : [
+        'update_status',
+        'friendships_destroy',
+      ],
       'message': serif,
+      'tw_id'  : args['user']['tw_id'],
       'origin' : args['origin'],
     }
 

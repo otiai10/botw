@@ -19,7 +19,7 @@ class Create:
 
       m = {
         'name'     : context['user']['screen_name'],
-        #'tw_id'    : context['user']['id_str'],
+        'tw_id'    : context['user']['tw_id'],
         'do_daily' : False,
         'daily'    : '',
         'tasks'    : [],

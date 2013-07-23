@@ -90,10 +90,13 @@ class Skel:
 
   def dispatch_action(self, args):
     _finally = []
-    if 'update_status' in args['actions'] and args['message'] is not None:
+    if 'update_status' in args['actions']     and args['message'] is not None:
       rest.statuses.update(status=args['message'], in_reply_to_status_id=args['origin']['id'])
       _finally.append('update_status')
-    if 'friendships_create' in args['actions'] and args['tw_id'] is not None:
+    if 'friendships_create'  in args['actions'] and args['tw_id'] is not None:
+      rest.friendships.create(id=args['tw_id'])
       _finally.append('friendships_create')
-      pass
+    if 'friendships_destroy' in args['actions'] and args['tw_id'] is not None:
+      rest.friendships.destroy(id=args['tw_id'])
+      _finally.append('friendships_destroy')
     return _finally
