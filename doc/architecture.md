@@ -1,5 +1,129 @@
 # 基本設計
 
+## 2013.07.23
+TODO: move twitter to under ~/.pyenv/
+```
+.
+|-- README.md
+|-- _labo
+|   |-- ifprocess
+|   |   `-- main.py
+|   |-- mongo
+|   |   |-- minimum.py
+|   |   `-- system -> ../../system
+|   |-- name
+|   |   |-- main.py
+|   |   `-- system -> ../../system
+|   |-- twitter
+|   |   |-- minimum.py
+|   |   `-- system -> ../../system
+|   `-- twitter.update
+|       |-- ex -> ../../ex
+|       |-- minimum.py
+|       |-- system -> ../../system
+|       `-- twitter
+|           |-- __init__.py
+|           |-- ansi.py
+|           |-- api.py
+|           |-- archiver.py
+|           |-- auth.py
+|           |-- cmdline.py
+|           |-- follow.py
+|           |-- ircbot.py
+|           |-- logger.py
+|           |-- oauth.py
+|           |-- oauth2.py
+|           |-- oauth_dance.py
+|           |-- stream.py
+|           |-- stream_example.py
+|           |-- timezones.py
+|           |-- twitter_globals.py
+|           `-- util.py
+|-- app.py
+|-- asset
+|   |-- __init__.py
+|   |-- __pycache__
+|   |-- manager.py
+|   |-- processor
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   `-- serif
+|   |       |-- __init__.py
+|   |       |-- __pycache__
+|   |       |-- common.py
+|   |       |-- relation.py
+|   |       |-- task.py
+|   |       `-- test.py
+|   `-- resource
+|       |-- command.json
+|       |-- serif
+|       |   |-- common.json
+|       |   |-- relation.json
+|       |   |-- task.json
+|       |   `-- test.json
+|       `-- trigger.json
+|-- cli
+|   `-- app.sh
+|-- doc
+|   |-- architecture.md
+|   `-- src
+|       `-- img
+|           `-- hisyotan.jpg
+|-- log
+|   |-- 2013.0714.log
+|   |-- 2013.0715.log
+|   |-- 2013.0716.log
+|   `-- 2013.0723.log
+|-- skel
+|   |-- __init__.py
+|   |-- __pycache__
+|   |-- base.py
+|   |-- filters.py
+|   |-- interpreter.py
+|   |-- procedure
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |-- common.py
+|   |   |-- relation.py
+|   |   |-- task.py
+|   |   `-- test.py
+|   `-- response
+|       |-- __init__.py
+|       |-- __pycache__
+|       |-- common.py
+|       |-- relation.py
+|       |-- task.py
+|       `-- test.py
+|-- system
+|   |-- __init__.py
+|   |-- __pycache__
+|   |-- alert.py
+|   |-- conf.py
+|   |-- conf.sample.py
+|   |-- logger.py
+|   `-- util.py
+`-- twitter
+    |-- __init__.py
+    |-- __pycache__
+    |-- ansi.py
+    |-- api.py
+    |-- archiver.py
+    |-- auth.py
+    |-- cmdline.py
+    |-- follow.py
+    |-- ircbot.py
+    |-- logger.py
+    |-- oauth.py
+    |-- oauth2.py
+    |-- oauth_dance.py
+    |-- stream.py
+    |-- stream_example.py
+    |-- timezones.py
+    |-- twitter_globals.py
+    `-- util.py
+
+34 directories, 83 files
+```
 ## 2013.07.15
 ```
 .
