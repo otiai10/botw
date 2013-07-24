@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
-from system import conf
+from system import conf,util
 
 class Alert:
   mail = {}
@@ -26,14 +26,20 @@ class Alert:
       """
 
   def send_mail(self):
-    s = smtplib.SMTP('localhost')
-    s.connect()
-    s.sendmail(
-      to_addrs=self.mail['to'],
-      from_addr=self.mail['from'],
-      msg=self.mail['body']
-    )
-    s.close()
+    try:
+      s = smtplib.SMTP('localhost')
+      s.connect()
+      s.sendmail(
+        to_addrs=self.mail['to'],
+        from_addr=self.mail['from'],
+        msg=self.mail['body']
+      )
+      s.close()
+    except:
+      # sending mail errors itself
+      # write stdout log
+      print("An Error Occurred But Failed to Sending Mail...[%s]" % util.get_timestr())
+      pass
 
   def set_params(self):
     pass

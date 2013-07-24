@@ -1,7 +1,6 @@
-from datetime import *
-import time, json, random
+import json, random
 
-from system import conf
+from system import conf,util
 
 class Asset:
 
@@ -47,5 +46,4 @@ class Asset:
       return json.load(f)
  
   def embed_debug_ts(self):
-    timestamp = time.mktime(datetime.now().timetuple())
-    self._text += ' and TS is ' + str(timestamp)
+    self._text += ' [TS:%s]' % util.get_timestamp()

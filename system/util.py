@@ -1,3 +1,5 @@
+from datetime import *
+import time
 
 def get_file_name(file__, contain_file_extension=False):
   if contain_file_extension:
@@ -26,3 +28,14 @@ def _convert_v1(tw):
     if (k in tw.keys()):
       result[k] = tw[k]
   return result
+
+def get_timestamp(is_float=False):
+  timestamp = time.mktime(datetime.now().timetuple())
+  if is_float:
+    return timestamp
+  return str(timestamp)
+
+def get_timestr(opt=None):
+  if opt is None:
+    return datetime.today().isoformat()
+  return str(None)
