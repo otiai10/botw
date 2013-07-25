@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from system import conf
+from system import conf, util
 
 client = MongoClient(conf.mongo['host'],conf.mongo['port'])
 db = client.test
@@ -68,7 +68,7 @@ class Add:
     if master.count() is 1:
       m = master[0]
       old = m['tasks']
-      added = context['origin']['text'].split(' ')
+      added = util.split_by_delimiter(context['origin']['text'])
       added.remove(conf.at_bot_name)
       added.remove(context['command'].strip())
       cur = old + added
@@ -110,9 +110,14 @@ class Done:
     master = collection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
-      tasks_from_text = context['origin']['text'].split(' ')
+      tasks_from_text = util.split_by_delimiter(context['origin']['text'])
       tasks_from_text.remove(conf.at_bot_name)
-      tasks_from_text.remove(context['command'].strip())
+      while True:
+        if context['command'].strip(util.delimiter) in tasks_from_text:
+          tasks_from_text.remove(context['command'].strip(util.delimiter))
+        else:
+          break
+
       (done, notfound, new) = rebuild_tasks(m['tasks'], tasks_from_text)
 
       # update record
