@@ -16,7 +16,7 @@ class Asset:
   def load(self, category, key):
     pool = {}
     resource_file = conf.app_root + '/asset/resource/serif/' + category.lower() + '.json'
-    with open(resource_file, 'r',  encoding='utf8') as f:
+    with open(resource_file, 'r', encoding='utf8') as f:
       pool = json.load(f)
     self.__loaded_rsrc = random.choice(pool[key])
 
@@ -42,7 +42,7 @@ class Asset:
 
   def get_dict(self, opt=None):
     resource_file = conf.app_root + '/asset/resource/' + self.__resource_type + '.json'
-    with open(resource_file, 'r') as f:
+    with open(resource_file, 'r', encoding='utf8') as f:
       return json.load(f)
  
   def embed_debug_ts(self):

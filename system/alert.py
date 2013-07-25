@@ -15,15 +15,12 @@ class Alert:
       #self.mail['body'] = u"Cannot handle : " + twtxt
       self.mail['body'] = twtxt
     if e is not None:
-      pass
-      """
-      base_str = ''
+      base_str = "\n\n------ Exception ------\n\n"
       base_str += "Type\t" + str(type(e)) + "\n"
       base_str += "Args\t" + str(e.args)  + "\n"
       base_str += "Mess\t" + e.message    + "\n\n"
       base_str += "Err\t"  + str(e) + "\n"
-      self.mail['body'] = base_str
-      """
+      self.mail['body'] += base_str
 
   def send_mail(self):
     try:

@@ -1,5 +1,8 @@
 from datetime import *
-import time
+import time,re
+
+delimiter = '[ 　]*'
+knot = ','
 
 def get_file_name(file__, contain_file_extension=False):
   if contain_file_extension:
@@ -39,3 +42,9 @@ def get_timestr(opt=None):
   if opt is None:
     return datetime.today().isoformat()
   return str(None)
+
+def split_by_delimiter(string):
+  return re.split(delimiter, string)
+
+def join_with_knot(_list):
+  return knot.join(_list)

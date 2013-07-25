@@ -72,6 +72,7 @@ class Done:
   # """ TODO : DRY
   __serif_category = ''
   __serif_key      = ''
+  __msg_args       = {}
   def __init__(self):
     self.__serif_category = util.get_file_name(__file__)
     self.__serif_key      = self.__class__.__name__

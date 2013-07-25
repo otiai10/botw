@@ -38,7 +38,8 @@ class Skel:
         continue
       try:
         self.tweet_by_tweet(tw)
-      except Exception as err:
+      except:
+        err = sys.exc_info()[0]
         Alert(e=err,twtxt=tw['text']).send_mail()
 
   # core function
