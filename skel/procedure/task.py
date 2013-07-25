@@ -70,7 +70,12 @@ class Add:
       old = m['tasks']
       added = util.split_by_delimiter(context['origin']['text'])
       added.remove(conf.at_bot_name)
-      added.remove(context['command'].strip())
+      while True:
+        if context['command'].strip(util.delimiter) in added:
+          added.remove(context['command'].strip(util.delimiter))
+        else:
+          break
+
       cur = old + added
 
       m['tasks'] = cur
