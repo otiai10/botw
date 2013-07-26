@@ -1,16 +1,16 @@
 {
-  "[ 　]*--help[ 　]*" : {"command":"help", "module":"common","class":"Help"},
-  "[ 　]*へるぷ[ 　]*" : {"command":"help", "module":"common","class":"Help"},
+  "[ 　]+--help[ 　]+" : {"command":"help", "module":"common","class":"Help"},
+  "[ 　]+へるぷ[ 　]+" : {"command":"help", "module":"common","class":"Help"},
 
-  "[ 　]*--list[ 　]*" : {"command":"list", "module":"task",  "class":"List"},
-  "[ 　]*なう[ 　]*"   : {"command":"list", "module":"task",  "class":"List"},
+  "[ 　]+--list[ 　]+" : {"command":"list", "module":"task",  "class":"List"},
+  "[ 　]+なう[ 　]+"   : {"command":"list", "module":"task",  "class":"List"},
 
-  "[ 　]*--done[ 　]*" : {"command":"done", "module":"task",  "class":"Done"},
-  "[ 　]*だん[ 　]*"   : {"command":"done", "module":"task",  "class":"Done"},
+  "[ 　]+--done[ 　]+" : {"command":"done", "module":"task",  "class":"Done"},
+  "[ 　]+だん[ 　]+"   : {"command":"done", "module":"task",  "class":"Done"},
 
-  "[ 　]*--add[ 　]*"  : {"command":"add", "module":"task",  "class":"Add" },
-  "[ 　]*うぃる[ 　]*" : {"command":"add", "module":"task",  "class":"Add" },
+  "[ 　]+--add[ 　]+"  : {"command":"add", "module":"task",  "class":"Add" },
+  "[ 　]+うぃる[ 　]+" : {"command":"add", "module":"task",  "class":"Add" },
 
-  "[ 　]*--hello-hisyotan[ 　]*"  : {"command":"hello",  "module":"relation", "class":"Create"},
-  "[ 　]*--byebye-hisyotan[ 　]*" : {"command":"byebye", "module":"relation", "class":"Destroy"}
+  "[ 　]+--hello-hisyotan[ 　]+"  : {"command":"hello",  "module":"relation", "class":"Create"},
+  "[ 　]+--byebye-hisyotan[ 　]+" : {"command":"byebye", "module":"relation", "class":"Destroy"}
 }
