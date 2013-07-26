@@ -4,6 +4,8 @@ import time, smtplib, sys
 from skel.interpreter import Interpreter
 from system import *
 
+from asset import Asset
+
 rest = Twitter(auth=OAuth(
   conf.access_token_key,
   conf.access_token_secret,
@@ -19,11 +21,13 @@ strm = TwitterStream(auth=OAuth(
 
 class Skel:
 
-  __name = ''
+  with_init_tw = False
+  __name    = ''
   __filters = ['Retweet','Myself']
 
-  def __init__(self, name):
+  def __init__(self, name, with_init_tw=False):
     self.__name = name
+    self.with_init_tw = with_init_tw
 
   def listen(self):
 
@@ -32,6 +36,10 @@ class Skel:
 
     bot = dict(screen_name=conf.bot_name)
     tl = strm.user(**bot)
+
+    if self.with_init_tw:
+      rest.statuses.update(status=Asset('serif').load('common','Initd').get_text())
+
     for t in tl:
       tw = util.convert_twitter_format(t)
       if tw['friends'] is not None:
