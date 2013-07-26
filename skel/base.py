@@ -1,5 +1,5 @@
 from twitter import *
-import time, smtplib
+import time, smtplib, sys
 
 from skel.interpreter import Interpreter
 from system import *
@@ -39,8 +39,8 @@ class Skel:
       try:
         self.tweet_by_tweet(tw)
       except:
-        err = sys.exc_info()[0]
-        Alert(e=err,twtxt=tw['text']).send_mail()
+        info = sys.exc_info()
+        Alert(info=info,twtxt=tw['text']).send_mail()
 
   # core function
   def tweet_by_tweet(self, tweet):

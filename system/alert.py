@@ -1,25 +1,30 @@
-import smtplib
+import smtplib, traceback, datetime
 from email.mime.text import MIMEText
 from email.utils import formatdate
 from system import conf,util
+from twitter import *
+
+rest = Twitter(auth=OAuth(
+  conf.access_token_key,
+  conf.access_token_secret,
+  conf.consumer_key,
+  conf.consumer_secret
+))
 
 class Alert:
   mail = {}
-  def __init__(self, e=None, twtxt=None):
+  def __init__(self, info=None, twtxt=None):
     self.mail = {
-      'body'    : 'ALERT OCCURED',
+      'body'    : "ALERT OCCURED\n\n",
       'to'      : conf.alert['mail_to'],
       'from'    : conf.alert['mail_from'],
     }
     if twtxt is not None:
-      #self.mail['body'] = u"Cannot handle : " + twtxt
-      self.mail['body'] = twtxt
-    if e is not None:
-      base_str = "\n\n------ Exception ------\n\n"
-      base_str += "Type\t" + str(type(e)) + "\n"
-      base_str += "Args\t" + str(e.args)  + "\n"
-      base_str += "Mess\t" + e.message    + "\n\n"
-      base_str += "Err\t"  + str(e) + "\n"
+      self.mail['body'] = "[" + twtxt + "]:\n"
+    if info is not None:
+      (ex, msg, tb) = info
+      base_str  = "Mess:" + str(msg) + "\n"
+      base_str += "Err :" + "\n".join(traceback.format_tb(tb)) + "\n"
       self.mail['body'] += base_str
 
   def send_mail(self):
@@ -29,7 +34,7 @@ class Alert:
       s.sendmail(
         to_addrs=self.mail['to'],
         from_addr=self.mail['from'],
-        msg=self.mail['body']
+        msg=self.mail['body'].encode('utf8')
       )
       s.close()
     except:
@@ -37,6 +42,8 @@ class Alert:
       # write stdout log
       print("An Error Occurred But Failed to Sending Mail...[%s]" % util.get_timestr())
       pass
+    status = conf.admin_name + conf.alert_tw_prefix # + self.mail['body'].replace('@','@\\')
+    rest.statuses.update(status=status[:139])
 
   def set_params(self):
     pass
