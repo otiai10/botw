@@ -11,6 +11,8 @@
   "[ 　]*--add[ 　]*"  : {"command":"add", "module":"task",  "class":"Add" },
   "[ 　]*うぃる[ 　]*" : {"command":"add", "module":"task",  "class":"Add" },
 
+  "[ 　]*--clear-all[ 　]*" : {"command":"clear", "module":"task", "class":"Clear"},
+
   "[ 　]*--hello-hisyotan[ 　]*"  : {"command":"hello",  "module":"relation", "class":"Create"},
   "[ 　]*--byebye-hisyotan[ 　]*" : {"command":"byebye", "module":"relation", "class":"Destroy"}
 }

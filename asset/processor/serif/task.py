@@ -56,3 +56,10 @@ class Done_With_Notfound:
     text = text.replace('%{notfound}', args['tasks']['notfound']['str'])
     text = text.replace('%{new}', args['tasks']['new']['str'])
     return text
+
+class Clear:
+  @classmethod
+  def process(self, resource, args):
+    text = '@' + args['user']['screen_name'] + ' '
+    text += resource.replace('%{command}', args['command'])
+    return text

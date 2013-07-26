@@ -152,3 +152,37 @@ class Done:
         'command' : context['command'],
       }
     return self.__response
+
+class Clear:
+  __response = {
+    'resp' : {},
+    'args' : {},
+  }
+  @classmethod
+  def perform(self, context):
+
+    master = collection.find({'name':context['user']['screen_name']})
+
+    if master.count() is 1:
+      m = master[0]
+      m['tasks'] = []
+      collection.save(m)
+
+      self.__response['resp']['module'] = 'task'
+      self.__response['resp']['class']  = 'Clear'
+
+      self.__response['args'] = {
+        'user'      : context['user'],
+        'origin'    : context['origin'],
+        'command'   : context['command'],
+      }
+    else:
+      # TODO: DRY
+      self.__response['resp']['module'] = 'common'
+      self.__response['resp']['class']  = 'Help'
+      self.__response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    return self.__response
