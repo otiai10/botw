@@ -1,7 +1,7 @@
 from twitter import *
 import time, smtplib, sys
 
-from skel.interpreter import Interpreter
+from core.interpreter import Interpreter
 from system import *
 
 from asset import Asset
@@ -73,7 +73,7 @@ class Skel:
     return None
 
   def pass_this_tw(self, tweet):
-    mod = __import__('skel.filters',globals(),locals(), self.__filters)
+    mod = __import__('core.filters',globals(),locals(), self.__filters)
     for f in self.__filters:
       Fltr = getattr(mod, f)
       if Fltr.accept(tweet) is False:
@@ -86,14 +86,14 @@ class Skel:
   def proc_this_context(self, context):
     mod_name = context['proc']['module']
     cls_name = context['proc']['class']
-    mod = __import__('.'.join(['skel','procedure',mod_name]),globals(),locals(),[cls_name])
+    mod = __import__('.'.join(['core','procedure',mod_name]),globals(),locals(),[cls_name])
     Proc = getattr(mod, cls_name)
     return Proc.perform(context['params'])
 
   def generate_reply_message(self, res):
     mod_name = res['resp']['module']
     cls_name = res['resp']['class']
-    mod = __import__('.'.join(['skel','response',mod_name]),globals(),locals(),[cls_name])
+    mod = __import__('.'.join(['core','response',mod_name]),globals(),locals(),[cls_name])
     Resp = getattr(mod, cls_name)
     return Resp().generate(res['args'])
 
