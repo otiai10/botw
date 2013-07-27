@@ -24,20 +24,17 @@ class Skel:
   with_init_tw = False
   __name    = ''
   __filters = ['Retweet','Myself']
+  bot       = None
 
-  def __init__(self, name, with_init_tw=False):
+  def __init__(self, name):
     self.__name = name
-    self.with_init_tw = with_init_tw
+    self.bot = dict(screen_name=name)
 
-  def listen(self):
+  def listen(self, with_init_tw=False):
 
-    last_got_id = None
-    itr_count = 0
+    tl = strm.user(**self.bot)
 
-    bot = dict(screen_name=conf.bot_name)
-    tl = strm.user(**bot)
-
-    if self.with_init_tw:
+    if with_init_tw:
       rest.statuses.update(status=Asset('serif').load('common','Initd').get_text())
 
     for t in tl:
@@ -49,6 +46,16 @@ class Skel:
       except:
         info = sys.exc_info()
         Alert(info=info,twtxt=tw['text']).send_mail()
+
+  def draw(self, opt={}):
+    # TMP : ignore options
+    count = 3
+    tl = rest.statuses.home_timeline(count=count)
+    print(type(tl))
+    print(len(tl))
+    for t in tl:
+      tw = util.convert_twitter_format(t)
+      self.tweet_by_tweet(tw)
 
   # core function
   def tweet_by_tweet(self, tweet):
@@ -63,7 +70,6 @@ class Skel:
     if res['resp'] is None:
       return None
     msg_args = self.generate_reply_message(res)
-    # TODO : if len(msg_args['actions']) is 0:
     _executed['Response'] = res['resp']
     if msg_args['actions'] is None or len(msg_args['actions']) is 0:
       return None

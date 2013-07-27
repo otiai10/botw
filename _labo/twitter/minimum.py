@@ -31,3 +31,7 @@ def timeline_test():
 if __name__ == '__main__':
   tweet_test()
   timeline_test()
+
+# tl = rest.statuses.mentions_timeline
+# tl = rest.statuses.user_timeline
+# tl = rest.statuses.home_timeline(**self.bot)
