@@ -1,22 +1,15 @@
 from pymongo import MongoClient
 from system import conf
+from core.procedure.base import ProcedureBase
 
 client = MongoClient(conf.mongo['host'],conf.mongo['port'])
 db = client.test
 collection = db.masters
 
-class Create:
-  __response = {
-    'resp' : {},
-    'args' : {},
-  }
-  @classmethod
+class Create(ProcedureBase):
   def perform(self, context):
-
     master = collection.find({'name':context['user']['screen_name']})
-
     if master.count() is 0:
-
       m = {
         'name'     : context['user']['screen_name'],
         'tw_id'    : context['user']['tw_id'],
@@ -26,56 +19,37 @@ class Create:
         'tasks'    : [],
       }
       collection.save(m)
-
-      self.__response['resp']['module'] = 'relation'
-      self.__response['resp']['class']  = 'Create'
-      self.__response['args'] = {
+      self._response['resp']['module'] = 'relation'
+      self._response['resp']['class']  = 'Create'
+      self._response['args'] = {
         'user'      : context['user'],
         'origin'    : context['origin'],
         'command'   : context['command'],
       }
     else:
-      self.__response['resp']['module'] = 'relation'
-      self.__response['resp']['class']  = 'AlreadyCreated'
-      self.__response['args'] = {
+      self._response['resp']['module'] = 'relation'
+      self._response['resp']['class']  = 'AlreadyCreated'
+      self._response['args'] = {
         'user'    : context['user'],
         'origin'  : context['origin'],
         'command' : context['command'],
       }
-    return self.__response
+    return self._response
 
-class Destroy:
-  __response = {
-    'resp' : {},
-    'args' : {},
-  }
-  @classmethod
+class Destroy(ProcedureBase):
   def perform(self, context):
-
     master = collection.find({'name':context['user']['screen_name']})
-
     if master.count() is 1:
-
       m = master[0]
-
       collection.remove(m)
-
       # TODO: DRY
-      self.__response['resp']['module'] = 'relation'
-      self.__response['resp']['class']  = 'Destroy'
-      self.__response['args'] = {
+      self._response['resp']['module'] = 'relation'
+      self._response['resp']['class']  = 'Destroy'
+      self._response['args'] = {
         'user'      : context['user'],
         'origin'    : context['origin'],
         'command'   : context['command'],
       }
-
     else:
-      # TODO: DRY
-      self.__response['resp']['module'] = 'common'
-      self.__response['resp']['class']  = 'Help'
-      self.__response['args'] = {
-        'user'    : context['user'],
-        'origin'  : context['origin'],
-        'command' : context['command'],
-      }
-    return self.__response
+      return self.res_common_help()
+    return self._response

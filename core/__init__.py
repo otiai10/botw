@@ -1,1 +1,1 @@
-from core.base import *
+from core.bot import Bot

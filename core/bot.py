@@ -19,7 +19,7 @@ strm = TwitterStream(auth=OAuth(
   conf.consumer_secret
 ))
 
-class Skel:
+class Bot:
 
   with_init_tw = False
   __name    = ''
@@ -101,7 +101,7 @@ class Skel:
     cls_name = context['proc']['class']
     mod = __import__('.'.join(['core','procedure',mod_name]),globals(),locals(),[cls_name])
     Proc = getattr(mod, cls_name)
-    return Proc.perform(context['params'])
+    return Proc().perform(context['params'])
 
   def generate_reply_message(self, res):
     mod_name = res['resp']['module']

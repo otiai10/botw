@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from system import conf, util
+from core.procedure.base import ProcedureBase
 
 client = MongoClient(conf.mongo['host'],conf.mongo['port'])
 db = client.test
@@ -11,76 +12,49 @@ def pick_up_target_masters(masters):
     res.append(m)
   return res
 
-class Execute:
-  __response = {
-    'resp' : {},
-    'args' : {},
-  }
-  @classmethod
+class Execute(ProcedureBase):
   def perform(self, context):
     masters = collection.find({'do_weekly':True})
-    self.__response['resp']['module'] = 'remind.weekly'
-    self.__response['resp']['class']  = 'Execute'
-    self.__response['args'] = {
+    self._response['resp']['module'] = 'remind.weekly'
+    self._response['resp']['class']  = 'Execute'
+    self._response['args'] = {
       #'masters' : pick_up_target_masters(masters),
       'masters' : collection.find({'name':'otiai10'}),
     }
-    return self.__response
+    return self._response
 
-class Enable:
-  __response = {
-    'resp' : {},
-    'args' : {},
-  }
-  @classmethod
+class Enable(ProcedureBase):
   def perform(self, context):
     master = collection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
       m['do_weekly'] = True
       collection.save(m)
-      self.__response['resp']['module'] = 'remind.weekly'
-      self.__response['resp']['class']  = 'Enable'
-      self.__response['args'] = {
+      self._response['resp']['module'] = 'remind.weekly'
+      self._response['resp']['class']  = 'Enable'
+      self._response['args'] = {
         'user'    : context['user'],
         'origin'  : context['origin'],
         'command' : context['command'],
       }
     else:
-      self.__response['resp']['module'] = 'common'
-      self.__response['resp']['class']  = 'Help'
-      self.__response['args'] = {
-        'user'    : context['user'],
-        'origin'  : context['origin'],
-        'command' : context['command'],
-      }
-    return self.__response
+      return self.res_common_help()
+    return self._response
 
-class Disable:
-  __response = {
-    'resp' : {},
-    'args' : {},
-  }
-  @classmethod
+class Disable(ProcedureBase):
   def perform(self, context):
     master = collection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
       m['do_weekly'] = False
       collection.save(m)
-      self.__response['resp']['module'] = 'remind.weekly'
-      self.__response['resp']['class']  = 'Disable'
-      self.__response['args'] = {
+      self._response['resp']['module'] = 'remind.weekly'
+      self._response['resp']['class']  = 'Disable'
+      self._response['args'] = {
         'user'    : context['user'],
         'origin'  : context['origin'],
         'command' : context['command'],
       }
     else:
-      self.__response['resp']['module'] = 'common'
-      self.__response['resp']['class']  = 'Help'
-      self.__response['args'] = {
-        'user'    : context['user'],
-        'origin'  : context['origin'],
-        'command' : context['command'],
-      }
-    return self.__response
+      return self.res_common_help()
+    return self._response

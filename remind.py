@@ -1,7 +1,7 @@
 import sys
-from core import *
+from core import Bot
 
-hisyotan = Skel(name='hisyotan')
+hisyotan = Bot(name='hisyotan')
 
 if 1 < len(sys.argv):
   if sys.argv[1] == '--daily':
