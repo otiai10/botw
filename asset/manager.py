@@ -15,7 +15,7 @@ class Asset:
 
   def load(self, category, key):
     pool = {}
-    resource_file = conf.app_root + '/asset/resource/serif/' + category.lower() + '.json'
+    resource_file = conf.app_root + '/asset/resource/serif/' + '/'.join(category.lower().split('.')) + '.json'
     with open(resource_file, 'r', encoding='utf8') as f:
       pool = json.load(f)
     self.__loaded_rsrc = random.choice(pool[key])

@@ -31,12 +31,9 @@ class Skel:
     self.bot = dict(screen_name=name)
 
   def listen(self, with_init_tw=False):
-
     tl = strm.user(**self.bot)
-
     if with_init_tw:
       rest.statuses.update(status=Asset('serif').load('common','Initd').get_text())
-
     for t in tl:
       tw = util.convert_twitter_format(t)
       if tw['friends'] is not None:
@@ -51,11 +48,21 @@ class Skel:
     # TMP : ignore options
     count = 3
     tl = rest.statuses.home_timeline(count=count)
-    print(type(tl))
-    print(len(tl))
     for t in tl:
       tw = util.convert_twitter_format(t)
       self.tweet_by_tweet(tw)
+
+  def remind(self, mode):
+    context = {
+      'proc'   : {'module' : '.'.join(['remind',mode]), 'class'  : 'Execute' },
+      'params' : {},
+    }
+    res = self.proc_this_context(context)
+    for m in res['args']['masters']:
+      _res = {'resp':res['resp'],'args':{'user':m}}
+      msg_args = self.generate_reply_message(_res)
+      result = self.dispatch_action(msg_args)
+      print("%s\t%s\tREMIND DONE" % (m['name'], mode))
 
   # core function
   def tweet_by_tweet(self, tweet):
@@ -106,7 +113,10 @@ class Skel:
   def dispatch_action(self, args):
     _finally = []
     if 'update_status' in args['actions']     and args['message'] is not None:
-      rest.statuses.update(status=args['message'], in_reply_to_status_id=args['origin']['id'])
+      if 'origin' in args:
+        rest.statuses.update(status=args['message'], in_reply_to_status_id=args['origin']['id'])
+      else:
+        rest.statuses.update(status=args['message'])
       _finally.append('update_status')
     if 'friendships_create'  in args['actions'] and args['tw_id'] is not None:
       rest.friendships.create(id=args['tw_id'])
