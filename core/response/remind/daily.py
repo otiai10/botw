@@ -11,6 +11,7 @@ class Execute:
   # }}}
     
   def generate(self, args):
+    args['tasks_str'] = util.join_with_knot(args['user']['tasks'])
     serif = Asset('serif').load(
       self.__serif_category,
       self.__serif_key

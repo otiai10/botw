@@ -5,6 +5,7 @@ class Execute:
     # {{{ replace ??? or any processing
     text = '@' + args['user']['name'] + ' '#TODO : DRY? or It's needed?
     text += resource
+    text = text.replace('%{tasks_str}', args['tasks_str'])
     # }}}
     return text
 
