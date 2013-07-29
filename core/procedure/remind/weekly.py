@@ -28,11 +28,59 @@ class Execute:
     return self.__response
 
 class Enable:
+  __response = {
+    'resp' : {},
+    'args' : {},
+  }
   @classmethod
   def perform(self, context):
-    pass
+    master = collection.find({'name':context['user']['screen_name']})
+    if master.count() is 1:
+      m = master[0]
+      m['do_weekly'] = True
+      collection.save(m)
+      self.__response['resp']['module'] = 'remind.weekly'
+      self.__response['resp']['class']  = 'Enable'
+      self.__response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    else:
+      self.__response['resp']['module'] = 'common'
+      self.__response['resp']['class']  = 'Help'
+      self.__response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    return self.__response
 
 class Disable:
+  __response = {
+    'resp' : {},
+    'args' : {},
+  }
   @classmethod
   def perform(self, context):
-    pass
+    master = collection.find({'name':context['user']['screen_name']})
+    if master.count() is 1:
+      m = master[0]
+      m['do_weekly'] = False
+      collection.save(m)
+      self.__response['resp']['module'] = 'remind.weekly'
+      self.__response['resp']['class']  = 'Disable'
+      self.__response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    else:
+      self.__response['resp']['module'] = 'common'
+      self.__response['resp']['class']  = 'Help'
+      self.__response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    return self.__response

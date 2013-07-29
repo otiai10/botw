@@ -34,7 +34,7 @@ class Alert:
       s.sendmail(
         to_addrs=self.mail['to'],
         from_addr=self.mail['from'],
-        msg=self.mail['body'].encode('utf8')
+        msg = self.mail['body'].encode('utf8') + util.get_timestr()
       )
       s.close()
     except:
