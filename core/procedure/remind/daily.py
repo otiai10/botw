@@ -12,7 +12,7 @@ def pick_up_target_masters(masters):
     res.append(m)
   return res
 
-class Execute:
+class Execute(ProcedureBase):
   def perform(self, context):
     masters = collection.find({'do_daily':True})
     self._response['resp']['module'] = 'remind.daily'
@@ -22,10 +22,38 @@ class Execute:
     }
     return self._response
 
-class Enable:
+class Enable(ProcedureBase):
   def perform(self, context):
-    pass
+    master = collection.find({'name':context['user']['screen_name']})
+    if master.count() is 1:
+      m = master[0]
+      m['do_daily'] = True
+      collection.save(m)
+      self._response['resp']['module'] = 'remind.daily'
+      self._response['resp']['class']  = 'Enable'
+      self._response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    else:
+      return self.res_common_help()
+    return self._response
 
-class Disable:
+class Disable(ProcedureBase):
   def perform(self, context):
-    pass
+    master = collection.find({'name':context['user']['screen_name']})
+    if master.count() is 1:
+      m = master[0]
+      m['do_daily'] = False
+      collection.save(m)
+      self._response['resp']['module'] = 'remind.daily'
+      self._response['resp']['class']  = 'Disable'
+      self._response['args'] = {
+        'user'    : context['user'],
+        'origin'  : context['origin'],
+        'command' : context['command'],
+      }
+    else:
+      return self.res_common_help()
+    return self._response
