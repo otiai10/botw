@@ -22,6 +22,7 @@ class Create:
         'tw_id'    : context['user']['tw_id'],
         'do_daily' : False,
         'daily'    : '',
+        'do_weekly': True,
         'tasks'    : [],
       }
       collection.save(m)

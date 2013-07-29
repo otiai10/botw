@@ -4,4 +4,13 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-python $PWD/remind.py --daily
+case $1 in
+  "--daily")
+    python $PWD/remind.py --daily
+    break;;
+  "--weekly")
+    python $PWD/remind.py --weekly
+    break;;
+  *)
+    break;;
+esac
