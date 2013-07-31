@@ -6,10 +6,10 @@ fi
 
 case $1 in
   "--daily")
-    python ~/prj/python/hisyotan/remind.py --daily
+    ~/.pyenv/versions/tool13.0721/bin/python ~/prj/python/hisyotan/remind.py --daily
     break;;
   "--weekly")
-    python ~/prj/python/hisyotan/remind.py --weekly
+    ~/.pyenv/versions/tool13.0721/bin/python ~/prj/python/hisyotan/remind.py --weekly
     break;;
   *)
     break;;
