@@ -19,7 +19,10 @@ table.commonds>tbody>tr:hover {
   background-color: #fff;
   -webkit-transition: background-color 0.2s linear;
 }
-
+table.commonds>tbody>tr:hover >td>small {
+  color: #000;
+  -webkit-transition: color 0.2s linear;
+}
 h1 {
   font-size: 5em;
 }
@@ -38,4 +41,8 @@ div#stream {
   width: 600px;
   top:   0;
   right: 0;
+}
+
+small.sample {
+  color: #f0f0f0;
 }
