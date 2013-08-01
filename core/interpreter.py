@@ -57,7 +57,7 @@ class Interpreter:
         }
         return True
       else:
-        self.__context['proc']   = {'module':'test','class':'Echo'}
+        self.__context['proc']   = {'module':'conversation','class':'Echo'}
         self.__context['params'] = {
           'text_given' : self.tweet['text'].replace(conf.at_bot_name,''),
         }

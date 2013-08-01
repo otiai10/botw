@@ -1,3 +1,4 @@
 {
-  "hisyotantest" : {"module":"test","class":"Trigger"}
+  "hisyotantest" : {"module":"trigger", "class":"Default"},
+  "GoodMorning"  : {"module":"trigger", "class":"Default"}
 }
