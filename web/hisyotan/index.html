@@ -4,41 +4,7 @@
   <meta charset='UTF-8'>
   <link rel="stylesheet" type="text/css" href="http://oti10.com/public/css/index.css">
   <link rel="stylesheet" type="text/css" href="http://oti10.com/public/css/common.css">
-  <style>
-    pre {
-      background-color: white;
-      padding:       4px 10px;
-      border-radius:      4px;
-      color: black;
-    }
-    div#footer {
-      height: 100px;
-      padding-top: 20px;
-    }
-    img.full-w {
-      width: 100%;
-    }
-    table.commonds>tbody>tr>td {
-      padding-left: 10px;
-    }
-    h1 {
-      font-size: 5em;
-    }
-    h2 {
-      font-size: 3em;
-      border: none;
-    }
-    div#main {
-      position: relative;
-    }
-    div#stream {
-      height: 320px;
-      width: 300px;
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="shorcut icon" href="src/favicon.hisyotan.png">
   <!--social-->
     <meta property="og:title" content="秘書たん"/>
@@ -54,52 +20,57 @@
   <div id="wrapper">
     <div id="main" class="content">
       <h1>hisyotan</h1>
-      <h2>is <small>under development</small></h2>
-        あなたのToDoを管理する Twitter BOT
-      <h2>command</h2>
-      <table class="commonds">
-        <thead id="basic-commands">
-          <tr><td colspan="3"><b>[basic commands]</b></td></tr>
-        </thead>
-        <tbody>
-          <tr><td> --hello-hisyotan </td><td> 友達になる                 </td><td><pre>@hisyotan --hello-hisyotan </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> うぃる (--add)   </td><td> TODOをおぼえといてもらう   </td><td><pre>@hisyotan うんこ うぃる    </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> なう   (--list)  </td><td> 今あるTODOを教えてもらう   </td><td><pre>@hisyotan なう             </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> だん   (--done)  </td><td> TODOを片付けてもらう       </td><td><pre>@hisyotan うんこ だん      </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --byebye-hisyotan</td><td> 友達をやめる(´・ω・`)      </td><td><pre>@hisyotan --byebye-hisyotan</pre></td><td><small><a href="#">sample</a></small></td></tr>
-        </tbody>
-        <thead id="adv-commands">
-          <tr><td colspan="3"><br><b>[advanced commands]</b></tr>
-        </thead>
-        <tbody>
-          <tr><td> --help           </td><td> とくになにも教えてくれない </td><td><pre>@hisyotan --help           </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --clear-all      </td><td> TODOをぜんぶ片付けてもらう </td><td><pre>@hisyotan --clear-all      </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --daily          </td><td> (鋭意開発中)               </td><td><pre>@hisyotan --daily 07:30    </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --daily-on       </td><td> 毎朝6:00のリマインドを有効にする</td><td><pre>@hisyotan --daily-on       </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --daily-off      </td><td> 毎朝のリマインドをしない        </td><td><pre>@hisyotan --daily-off      </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --weekly-on      </td><td> 毎週土曜のリマインド       </td><td><pre>@hisyotan --weekly-on      </pre></td><td><small><a href="#">sample</a></small></td></tr>
-          <tr><td> --weekly-off     </td><td> 毎週のリマインドをしない   </td><td><pre>@hisyotan --weekly-off     </pre></td><td><small><a href="#">sample</a></small></td></tr>
-        </tbody>
-      </table>
-
-      <h2>github</h2>
-      <a href="https://github.com/otiai10/hisyotan.py">https://github.com/otiai10/hisyotan.py</a>
-      <br>
-      <br>
-      <br>
-      <img class="full-w" src="src/hisyotan.big.jpg">
-      <p><a href="https://twitter.com/mari_koebu">画:@mari_koebu</a></p>
-      <div id="stream">
-        <a class="twitter-timeline" href="https://twitter.com/hisyotan" data-widget-id="362363755872518144">@hisyotan からのツイート</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </div>
+      <div class="division">
+        <h2>is <small>under development</small></h2>
+          あなたのToDoを管理する Twitter BOT
+          <div id="stream">
+            <a class="twitter-timeline" href="https://twitter.com/hisyotan" data-widget-id="362363755872518144">@hisyotan からのツイート</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+      </div><!-- /division -->
+      <div class="division">
+        <h2>command</h2>
+        <table class="commonds" border="0">
+          <thead id="basic-commands">
+            <tr><td colspan="3"><b>[basic commands]</b></td></tr>
+          </thead>
+          <tbody>
+            <tr><td> --hello-hisyotan </td><td> 友達になる                 </td><td><pre>@hisyotan --hello-hisyotan </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> うぃる (--add)   </td><td> TODOをおぼえといてもらう   </td><td><pre>@hisyotan うんこ うぃる    </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> なう   (--list)  </td><td> 今あるTODOを教えてもらう   </td><td><pre>@hisyotan なう             </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> だん   (--done)  </td><td> TODOを片付けてもらう       </td><td><pre>@hisyotan うんこ だん      </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --byebye-hisyotan</td><td> 友達をやめる(´・ω・`)      </td><td><pre>@hisyotan --byebye-hisyotan</pre></td><td><small><a href="#">sample</a></small></td></tr>
+          </tbody>
+          <thead id="adv-commands">
+            <tr><td colspan="3"><br><b>[advanced commands]</b></tr>
+          </thead>
+          <tbody>
+            <tr><td> --help           </td><td> とくになにも教えてくれない </td><td><pre>@hisyotan --help           </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --clear-all      </td><td> TODOをぜんぶ片付けてもらう </td><td><pre>@hisyotan --clear-all      </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --daily          </td><td> (鋭意開発中)               </td><td><pre>@hisyotan --daily 07:30    </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --daily-on       </td><td> 毎朝6:00のリマインドを有効にする</td><td><pre>@hisyotan --daily-on       </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --daily-off      </td><td> 毎朝のリマインドをしない        </td><td><pre>@hisyotan --daily-off      </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --weekly-on      </td><td> 毎週土曜のリマインド       </td><td><pre>@hisyotan --weekly-on      </pre></td><td><small><a href="#">sample</a></small></td></tr>
+            <tr><td> --weekly-off     </td><td> 毎週のリマインドをしない   </td><td><pre>@hisyotan --weekly-off     </pre></td><td><small><a href="#">sample</a></small></td></tr>
+          </tbody>
+        </table>
+      </div><!-- /division -->
+      <div class="division">
+        <h2>github</h2>
+        <a href="https://github.com/otiai10/hisyotan.py">https://github.com/otiai10/hisyotan.py</a>
+        <br>
+        <br>
+        <br>
+        <img id="hisyotan-portrait" class="full-w" src="src/hisyotan.big.jpg">
+        <p><a href="https://twitter.com/mari_koebu">画:@mari_koebu</a></p>
+      </div><!-- /division -->
     </div><!--/#main-->
     <div id="footer" class="content">
       <p>
         <div class="pull-right">
         <table></tbody>
-          <tr><td class="pull-left"><a target="_blank" href="https://twitter.com/intent/tweet?text=@otiai10+&original_referer=http://oti10.com/hisyotan/">苦情・お問い合わせ</td></tr>
-          <tr><td class="pull-left"><a target="_blank" href="https://github.com/otiai10/hisyotan.py/issues/new">バグ・機能改善</a></td></tr>
+          <tr><td class="pull-left"><a target="_blank" href="https://twitter.com/intent/tweet?text=@otiai10+&original_referer=http://oti10.com/hisyotan/"><small>苦情・お問い合わせ</small></a></td></tr>
+          <tr><td class="pull-left"><a target="_blank" href="https://github.com/otiai10/hisyotan.py/issues/new"><small>バグ・機能改善</small></a></td></tr>
         </tbody></table>
         </div>
       </p>
