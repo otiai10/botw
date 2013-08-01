@@ -22,5 +22,17 @@
       "id" : "362829875683397632",
       "retweet_count" : 0,
       "friends" : null
+  },
+  "Common.Help" : {
+      "retweeted" : false,
+      "text"      : "@hisyotan --help",
+      "in_reply_to_screen_name" : "hisyotan",
+      "user" : {
+        "screen_name" : "otiai10",
+        "id"          : 140021552
+      },
+      "id" : "362829875683397632",
+      "retweet_count" : 0,
+      "friends" : null
   }
 }

@@ -1,6 +1,6 @@
 from core.procedure.base import ProcedureBase
 
-class Help:
+class Help(ProcedureBase):
   def perform(self, context):
     self._response['resp']['module'] = 'common'
     self._response['resp']['class']  = 'Help'
