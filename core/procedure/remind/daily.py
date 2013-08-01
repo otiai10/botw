@@ -37,7 +37,7 @@ class Enable(ProcedureBase):
         'command' : context['command'],
       }
     else:
-      return self.res_common_help()
+      return self.res_common_help(context)
     return self._response
 
 class Disable(ProcedureBase):
@@ -55,5 +55,5 @@ class Disable(ProcedureBase):
         'command' : context['command'],
       }
     else:
-      return self.res_common_help()
+      return self.res_common_help(context)
     return self._response

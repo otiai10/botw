@@ -4,7 +4,7 @@ class ProcedureBase:
     'args' : {},
   }
 
-  def res_common_help(self):
+  def res_common_help(self, context):
     self._response['resp']['module'] = 'common'
     self._response['resp']['class']  = 'Help'
     self._response['args'] = {

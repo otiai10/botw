@@ -31,12 +31,11 @@ class Asset:
     self._text = Prcsr.process(self.__loaded_rsrc, params)
     return self
 
-  def get_text(self, opt=None):
+  def get_text(self, opt={}):
     if not hasattr(self, '_text'):
       self._text = self.__loaded_rsrc
-    # """ debug
-    self.embed_debug_ts()
-    # """
+    if 'ts' in opt:
+      self.embed_debug_ts()
     return self._text
 
   def get_dict(self, opt=None):

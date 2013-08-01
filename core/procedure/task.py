@@ -30,7 +30,7 @@ class List(ProcedureBase):
           'command'   : context['command'],
         }
     else:
-      return self.res_common_help()
+      return self.res_common_help(context)
     return self._response
 
 class Add(ProcedureBase):
@@ -67,7 +67,7 @@ class Add(ProcedureBase):
         'command'   : context['command'],
       }
     else:
-      return self.res_common_help()
+      return self.res_common_help(context)
     return self._response
 
 class Done(ProcedureBase):
@@ -103,7 +103,7 @@ class Done(ProcedureBase):
         'command'   : context['command'],
       }
     else:
-      return self.res_common_help()
+      return self.res_common_help(context)
     return self._response
 
 class Clear(ProcedureBase):
@@ -122,5 +122,5 @@ class Clear(ProcedureBase):
         'command'   : context['command'],
       }
     else:
-      return self.res_common_help()
+      return self.res_common_help(context)
     return self._response

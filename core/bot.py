@@ -34,7 +34,7 @@ class Bot:
   def listen(self, with_init_tw=False):
     tl = strm.user(**self.bot)
     if with_init_tw:
-      rest.statuses.update(status=Asset('serif').load('common','Initd').get_text())
+      rest.statuses.update(status=Asset('serif').load('common','Initd').get_text({'ts':True}))
     for t in tl:
       tw = util.convert_twitter_format(t)
       if tw['friends'] is not None:
