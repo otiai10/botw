@@ -45,12 +45,9 @@ class Bot:
         Alert(info=info,twtxt=tw['text']).send_mail()
 
   def draw(self, opt={}):
-    # TMP : ignore options
-    count = 3
-    tl = rest.statuses.home_timeline(count=count)
-    for t in tl:
-      tw = util.convert_twitter_format(t)
-      self.tweet_by_tweet(tw)
+    test_tweets = Asset('test.tw').get_dict()
+    tw = test_tweets['GoodMorning']
+    self.tweet_by_tweet(tw);
 
   def remind(self, mode):
     context = {
