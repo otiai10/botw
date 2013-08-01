@@ -1,5 +1,5 @@
 from twitter import *
-import time, smtplib, sys
+import sys
 
 from core.interpreter import Interpreter
 from system import *
@@ -50,8 +50,9 @@ class Bot:
     self.console = opt['console']
     if opt['key'] == 'all':
       for k,tw in test_tweets.items():
-        print("=> %s" % k)
-        self.tweet_by_tweet(tw)
+        _executed = self.tweet_by_tweet(tw)
+        stdout = self._build_stdout_for_draw(k,tw,_executed)
+        print(stdout)
     else:
       tw = test_tweets[opt['key']]
       self.tweet_by_tweet(tw);
@@ -85,8 +86,9 @@ class Bot:
     if msg_args['actions'] is None or len(msg_args['actions']) is 0:
       return None
     if self.console:
-      print({'PSEUDO EXECUTED':_executed})
-      return None
+      if 'message' in msg_args:
+        _executed['Actions'] = msg_args
+      return _executed
     result = self.dispatch_action(msg_args)
     _executed['Actions'] = result
     print({'EXECUTED':_executed})
@@ -132,3 +134,11 @@ class Bot:
       rest.friendships.destroy(id=args['tw_id'])
       _finally.append('friendships_destroy')
     return _finally
+
+  def _build_stdout_for_draw(self, k, tw, _executed):
+    if 'message' in _executed['Actions']:
+      mess = _executed['Actions']['message']
+      _executed.pop('Actions')
+      return '=> %s\n\t|------\t"%s"\n\t|------\t%s\n\t`------\t"%s"' % (k,tw['text'], _executed, mess)
+    _executed.pop('Actions')
+    return '=> %s\n\t|------\t"%s"\n\t`------\t%s' % (k,tw['text'], _executed, mess)

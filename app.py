@@ -1,4 +1,6 @@
-import sys
+import sys,io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 from core import Bot
 
 hisyotan = Bot(name='hisyotan')

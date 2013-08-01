@@ -11,7 +11,7 @@
       "retweet_count" : 0,
       "friends" : null
   },
-  "Conversation.Echo" : {
+  "Conv.Echo" : {
       "retweeted" : false,
       "text"      : "@hisyotan エコーのテストだよん",
       "in_reply_to_screen_name" : "hisyotan",
