@@ -1,5 +1,119 @@
 # 基本設計
 
+## 2013.0801
+TDOO: enrich serif
+```
+.
+|-- README.md
+|-- _labo
+|-- app.py
+|-- asset
+|   |-- __init__.py
+|   |-- __pycache__
+|   |-- manager.py
+|   |-- processor
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   `-- serif
+|   |       |-- __init__.py
+|   |       |-- __pycache__
+|   |       |-- common.py
+|   |       |-- conversation
+|   |       |   |-- __init__.py
+|   |       |   `-- __pycache__
+|   |       |-- relation.py
+|   |       |-- remind
+|   |       |   |-- __pycache__
+|   |       |   |-- daily.py
+|   |       |   `-- weekly.py
+|   |       |-- task.py
+|   |       `-- trigger
+|   |           `-- __init__.py
+|   `-- resource
+|       |-- command.json
+|       |-- serif
+|       |   |-- common.json
+|       |   |-- conversation.json
+|       |   |-- relation.json
+|       |   |-- remind
+|       |   |   |-- daily.json
+|       |   |   `-- weekly.json
+|       |   |-- task.json
+|       |   `-- trigger.json
+|       |-- test.tw.json
+|       `-- trigger.json
+|-- cli
+|   |-- app.sh
+|   `-- reminder.sh
+|-- core
+|   |-- __init__.py
+|   |-- __pycache__
+|   |-- bot.py
+|   |-- filters.py
+|   |-- interpreter.py
+|   |-- procedure
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |-- base.py
+|   |   |-- common.py
+|   |   |-- conversation
+|   |   |   |-- __init__.py
+|   |   |   `-- __pycache__
+|   |   |-- relation.py
+|   |   |-- remind
+|   |   |   |-- __init__.py
+|   |   |   |-- __pycache__
+|   |   |   |-- daily.py
+|   |   |   `-- weekly.py
+|   |   |-- task.py
+|   |   `-- trigger
+|   |       `-- __init__.py
+|   `-- response
+|       |-- __init__.py
+|       |-- __pycache__
+|       |-- common.py
+|       |-- conversation
+|       |   |-- __init__.py
+|       |   `-- __pycache__
+|       |-- relation.py
+|       |-- remind
+|       |   |-- __pycache__
+|       |   |-- daily.py
+|       |   `-- weekly.py
+|       |-- task.py
+|       `-- trigger
+|           `-- __init__.py
+|-- doc
+|   |-- architecture.md
+|   `-- src
+|       `-- img
+|           `-- hisyotan.jpg
+|-- log
+|-- remind.py
+|-- system
+|   |-- __init__.py
+|   |-- __pycache__
+|   |-- alert.py
+|   |-- conf.py
+|   |-- conf.sample.py
+|   |-- logger.py
+|   `-- util.py
+|-- test
+|   `-- runner.sh
+`-- web
+    `-- hisyotan
+        |-- css
+        |   `-- main.css
+        |-- index.html
+        |-- js
+        |   `-- main.js
+        |-- src
+        |   |-- favicon.hisyotan.png
+        |   `-- hisyotan.big.jpg
+        `-- yet.html
+
+57 directories, 83 files
+```
 ## 2013.07.23
 TODO: move twitter to under ~/.pyenv/
 ```
