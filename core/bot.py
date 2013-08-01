@@ -25,6 +25,7 @@ class Bot:
   __name    = ''
   __filters = ['Retweet','Myself']
   bot       = None
+  console   = False
 
   def __init__(self, name):
     self.__name = name
@@ -46,8 +47,14 @@ class Bot:
 
   def draw(self, opt={}):
     test_tweets = Asset('test.tw').get_dict()
-    tw = test_tweets['GoodMorning']
-    self.tweet_by_tweet(tw);
+    self.console = opt['console']
+    if opt['key'] == 'all':
+      for k,tw in test_tweets.items():
+        print("=> %s" % k)
+        self.tweet_by_tweet(tw)
+    else:
+      tw = test_tweets[opt['key']]
+      self.tweet_by_tweet(tw);
 
   def remind(self, mode):
     context = {
@@ -76,6 +83,9 @@ class Bot:
     msg_args = self.generate_reply_message(res)
     _executed['Response'] = res['resp']
     if msg_args['actions'] is None or len(msg_args['actions']) is 0:
+      return None
+    if self.console:
+      print({'PSEUDO EXECUTED':_executed})
       return None
     result = self.dispatch_action(msg_args)
     _executed['Actions'] = result
