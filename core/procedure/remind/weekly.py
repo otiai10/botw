@@ -18,8 +18,7 @@ class Execute(ProcedureBase):
     self._response['resp']['module'] = 'remind.weekly'
     self._response['resp']['class']  = 'Execute'
     self._response['args'] = {
-      #'masters' : pick_up_target_masters(masters),
-      'masters' : collection.find({'name':'otiai10'}),
+      'masters' : pick_up_target_masters(masters),
     }
     return self._response
 

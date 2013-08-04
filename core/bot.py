@@ -55,7 +55,9 @@ class Bot:
         print(stdout)
     else:
       tw = test_tweets[opt['key']]
-      self.tweet_by_tweet(tw);
+      _executed = self.tweet_by_tweet(tw)
+      stdout = self._build_stdout_for_draw(opt['key'],tw,_executed)
+      print(stdout)
 
   def remind(self, mode):
     context = {
@@ -63,6 +65,8 @@ class Bot:
       'params' : {},
     }
     res = self.proc_this_context(context)
+    if len(res['args']['masters']) is 0:
+      print("There is No Master Needs %s Remind" % mode)
     for m in res['args']['masters']:
       _res = {'resp':res['resp'],'args':{'user':m}}
       msg_args = self.generate_reply_message(_res)
@@ -136,6 +140,8 @@ class Bot:
     return _finally
 
   def _build_stdout_for_draw(self, k, tw, _executed):
+    if _executed is None:
+      return '=> %s\n\t|------\t"%s"\n\t|------\t%s\n\t`------\t"%s"' % (k,tw['text'], _executed,'')
     if 'message' in _executed['Actions']:
       mess = _executed['Actions']['message']
       _executed.pop('Actions')

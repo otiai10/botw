@@ -6,9 +6,17 @@ from core import Bot
 hisyotan = Bot(name='hisyotan')
 
 if 1 < len(sys.argv):
-  if sys.argv[1] == 'd':
+  arg1 = sys.argv[1]
+  if arg1 == 'd' or arg1 == '--daemon':
+    # app.py d
     hisyotan.listen(with_init_tw=True)
-  elif sys.argv[1] == 'o':
+  elif arg1 == 'o' or arg1 == '--once':
+    # app.py o all
+    # app.py o Conv.Echo
     hisyotan.draw(opt={'key':sys.argv[2],'console':True})
+  elif arg1 ==  'r' or arg1 == '--remind':
+    # app.py r daily
+    # app.py r weekly
+    hisyotan.remind(mode=sys.argv[2])
 else:
   hisyotan.listen(with_init_tw=False)
