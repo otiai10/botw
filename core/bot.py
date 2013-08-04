@@ -45,17 +45,17 @@ class Bot:
         info = sys.exc_info()
         Alert(info=info,twtxt=tw['text']).send_mail()
 
-  def draw(self, opt={}):
+  def draw(self, key='all', console=False):
+    self.console = console
     test_tweets = Asset('test.tw').get_dict()
-    self.console = opt['console']
-    if opt['key'] == 'all':
+    if key == 'all':
       for k,tw in test_tweets.items():
         _executed = self.tweet_by_tweet(tw)
         self._presentation(k,tw,_executed)
     else:
-      tw = test_tweets[opt['key']]
+      tw = test_tweets[key]
       _executed = self.tweet_by_tweet(tw)
-      self._presentation(opt['key'],tw,_executed)
+      self._presentation(key,tw,_executed)
 
   def remind(self, mode):
     context = {

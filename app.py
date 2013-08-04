@@ -13,7 +13,10 @@ if 1 < len(sys.argv):
   elif arg1 == 'o' or arg1 == '--once':
     # app.py o all
     # app.py o Conv.Echo
-    hisyotan.draw(opt={'key':sys.argv[2],'console':True})
+    hisyotan.draw(key=sys.argv[2],console=True)
+  elif arg1 ==  'm' or arg1 == '--monologue':
+    # app.py m
+    hisyotan.monologue(console=True)
   elif arg1 ==  'r' or arg1 == '--remind':
     # app.py r daily
     # app.py r weekly
