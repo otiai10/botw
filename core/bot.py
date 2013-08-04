@@ -51,13 +51,11 @@ class Bot:
     if opt['key'] == 'all':
       for k,tw in test_tweets.items():
         _executed = self.tweet_by_tweet(tw)
-        stdout = self._build_stdout_for_draw(k,tw,_executed)
-        print(stdout)
+        self._presentation(k,tw,_executed)
     else:
       tw = test_tweets[opt['key']]
       _executed = self.tweet_by_tweet(tw)
-      stdout = self._build_stdout_for_draw(opt['key'],tw,_executed)
-      print(stdout)
+      self._presentation(opt['key'],tw,_executed)
 
   def remind(self, mode):
     context = {
@@ -69,7 +67,7 @@ class Bot:
       print("There is No Master Needs %s Remind" % mode)
     for m in res['args']['masters']:
       _res = {'resp':res['resp'],'args':{'user':m}}
-      msg_args = self.generate_reply_message(_res)
+      msg_args = self.generate_message(_res)
       result = self.dispatch_action(msg_args)
       print("%s\t%s\tREMIND DONE" % (m['name'], mode))
 
@@ -85,7 +83,7 @@ class Bot:
     _executed['Procedure'] = context['proc']
     if res['resp'] is None:
       return None
-    msg_args = self.generate_reply_message(res)
+    msg_args = self.generate_message(res)
     _executed['Response'] = res['resp']
     if msg_args['actions'] is None or len(msg_args['actions']) is 0:
       return None
@@ -116,7 +114,7 @@ class Bot:
     Proc = getattr(mod, cls_name)
     return Proc().perform(context['params'])
 
-  def generate_reply_message(self, res):
+  def generate_message(self, res):
     mod_name = res['resp']['module']
     cls_name = res['resp']['class']
     mod = __import__('.'.join(['core','response',mod_name]),globals(),locals(),[cls_name])
@@ -139,12 +137,15 @@ class Bot:
       _finally.append('friendships_destroy')
     return _finally
 
-  def _build_stdout_for_draw(self, k, tw, _executed):
+  def _presentation(self, k, tw, _executed):
     if _executed is None:
-      return '=> %s\n\t|------\t"%s"\n\t|------\t%s\n\t`------\t"%s"' % (k,tw['text'], _executed,'')
+      print('=> %s\n\t|------\t"%s"\n\t|------\t%s\n\t`------\t"%s"' % (k,tw['text'], _executed,''))
+      return True
     if 'message' in _executed['Actions']:
       mess = _executed['Actions']['message']
       _executed.pop('Actions')
-      return '=> %s\n\t|------\t"%s"\n\t|------\t%s\n\t`------\t"%s"' % (k,tw['text'], _executed, mess)
+      print('=> %s\n\t|------\t"%s"\n\t|------\t%s\n\t`------\t"%s"' % (k,tw['text'], _executed, mess))
+      return True
     _executed.pop('Actions')
-    return '=> %s\n\t|------\t"%s"\n\t`------\t%s' % (k,tw['text'], _executed, mess)
+    print('=> %s\n\t|------\t"%s"\n\t`------\t%s' % (k,tw['text'], _executed, mess))
+    return True
