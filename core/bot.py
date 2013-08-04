@@ -58,10 +58,7 @@ class Bot:
       self._presentation(key,tw,_executed)
 
   def remind(self, mode):
-    context = {
-      'proc'   : {'module' : '.'.join(['remind',mode]), 'class'  : 'Execute' },
-      'params' : {},
-    }
+    context = { 'proc'   : {'module' : '.'.join(['remind',mode]), 'class'  : 'Execute' },'params' : {} }
     res = self.proc_this_context(context)
     if len(res['args']['masters']) is 0:
       print("There is No Master Needs %s Remind" % mode)
@@ -70,6 +67,15 @@ class Bot:
       msg_args = self.generate_message(_res)
       result = self.dispatch_action(msg_args)
       print("%s\t%s\tREMIND DONE" % (m['name'], mode))
+
+  def monologue(self, console=False):
+    self.console = console
+    context = { 'proc'   : {'module' : 'monologue', 'class'  : 'Execute' }, 'params' : {} }
+    res = self.proc_this_context(context)
+    msg_args = self.generate_message(res)
+    if self.console:
+      return self._presentation('Monologue',{'text':'-----'}, {'Actions':msg_args})
+    result = self.dispatch_action(msg_args)
 
   # core function
   def tweet_by_tweet(self, tweet):

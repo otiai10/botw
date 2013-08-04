@@ -16,7 +16,10 @@ if 1 < len(sys.argv):
     hisyotan.draw(key=sys.argv[2],console=True)
   elif arg1 ==  'm' or arg1 == '--monologue':
     # app.py m
-    hisyotan.monologue(console=True)
+    if 2 < len(sys.argv):
+      hisyotan.monologue(console=True)
+    else:
+      hisyotan.monologue(console=False)
   elif arg1 ==  'r' or arg1 == '--remind':
     # app.py r daily
     # app.py r weekly
