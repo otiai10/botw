@@ -72,6 +72,10 @@ class Bot:
     self.console = console
     context = { 'proc'   : {'module' : 'monologue', 'class'  : 'Execute' }, 'params' : {} }
     res = self.proc_this_context(context)
+    if res is None:
+      if self.console:
+        return self._presentation('Monologue',{'text':'-----'}, {'Actions':{'message':'Pass by monologue rate'}})
+      return None
     msg_args = self.generate_message(res)
     if self.console:
       return self._presentation('Monologue',{'text':'-----'}, {'Actions':msg_args})

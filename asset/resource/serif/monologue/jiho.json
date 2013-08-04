@@ -1,0 +1,13 @@
+{
+  "Yoruho" : [
+    "This is YORUHO!!! * * *"
+  ],
+  "Hiruho" : [
+    "This is HIROHO!!! - - -"
+  ],
+  "Jiho" : [
+    "%{hour} だよ DAYO01 ^^^",
+    "%{hour} だよ DAYO02 ^^^",
+    "%{hour} だよ DAYO03 ^^^"
+  ]
+}
