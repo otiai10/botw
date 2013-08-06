@@ -23,7 +23,7 @@ class Bot:
 
   with_init_tw = False
   __name    = ''
-  __filters = ['Retweet','Myself']
+  __filters = ['FirstOfStreaming','Retweet','Myself']
   bot       = None
   console   = False
 
@@ -37,13 +37,10 @@ class Bot:
       rest.statuses.update(status=Asset('serif').load('common','Initd').get_text({'ts':True}))
     for t in tl:
       tw = util.convert_twitter_format(t)
-      if tw['friends'] is not None:
-        continue
       try:
         self.tweet_by_tweet(tw)
       except:
-        info = sys.exc_info()
-        Alert(info=info,twtxt=tw['text']).send_mail()
+        Alert(info=sys.exc_info(),twtxt=tw['text']).send_mail()
 
   def draw(self, key='all', console=False):
     self.console = console

@@ -20,11 +20,11 @@ class Alert:
       'from'    : conf.alert['mail_from'],
     }
     if twtxt is not None:
-      self.mail['body'] = "[" + twtxt + "]:\n"
+      self.mail['body'] = "HANDLING \t: \"" + twtxt + "\":\n"
     if info is not None:
       (ex, msg, tb) = info
-      base_str  = "Mess:" + str(msg) + "\n"
-      base_str += "Err :" + "\n".join(traceback.format_tb(tb)) + "\n"
+      base_str  = "MESSAGE  \t: " + str(msg) + "\n"
+      base_str += "TRACEBACK\t: " + "\n".join(traceback.format_tb(tb)) + "\n"
       self.mail['body'] += base_str
 
   def send_mail(self):
@@ -42,7 +42,8 @@ class Alert:
       # write stdout log
       print("An Error Occurred But Failed to Sending Mail...[%s]" % util.get_timestr())
       pass
-    status = conf.admin_name + conf.alert_tw_prefix + util.get_timestr() # + self.mail['body'].replace('@','@\\')
+    # status = conf.admin_name + conf.alert_tw_prefix + util.get_timestr() # + self.mail['body'].replace('@','@\\')
+    status = conf.admin_name + util.get_timestr() + self.mail['body'].replace('@','@\\')
     rest.statuses.update(status=status[:139])
 
   def set_params(self):
