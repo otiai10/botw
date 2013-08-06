@@ -11,6 +11,30 @@
       "retweet_count" : 0,
       "friends" : null
   },
+  "Task.List.space" : {
+      "retweeted" : false,
+      "text"      : "@hisyotan　なう   hoge",
+      "in_reply_to_screen_name" : "hisyotan",
+      "user" : {
+        "screen_name" : "otiai10",
+        "id"          : 140021552
+      },
+      "id" : "362829875683397632",
+      "retweet_count" : 0,
+      "friends" : null
+  },
+  "Task.List.unspace" : {
+      "retweeted" : false,
+      "text"      : "@hisyotan　なうhoge",
+      "in_reply_to_screen_name" : "hisyotan",
+      "user" : {
+        "screen_name" : "otiai10",
+        "id"          : 140021552
+      },
+      "id" : "362829875683397632",
+      "retweet_count" : 0,
+      "friends" : null
+  },
   "GoodMorning" : {
       "retweeted" : false,
       "text"      : "GoodMorning",
