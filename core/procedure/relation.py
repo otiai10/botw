@@ -1,14 +1,8 @@
-from pymongo import MongoClient
-from system import conf
 from core.procedure.base import ProcedureBase
-
-client = MongoClient(conf.mongo['host'],conf.mongo['port'])
-db = client.test
-collection = db.masters
 
 class Create(ProcedureBase):
   def perform(self, context):
-    master = collection.find({'name':context['user']['screen_name']})
+    master = self.mcollection.find({'name':context['user']['screen_name']})
     if master.count() is 0:
       m = {
         'name'     : context['user']['screen_name'],
@@ -18,7 +12,7 @@ class Create(ProcedureBase):
         'do_weekly': True,
         'tasks'    : [],
       }
-      collection.save(m)
+      self.mcollection.save(m)
       self._response['resp']['module'] = 'relation'
       self._response['resp']['class']  = 'Create'
       self._response['args'] = {
@@ -38,10 +32,10 @@ class Create(ProcedureBase):
 
 class Destroy(ProcedureBase):
   def perform(self, context):
-    master = collection.find({'name':context['user']['screen_name']})
+    master = self.mcollection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
-      collection.remove(m)
+      self.mcollection.remove(m)
       # TODO: DRY
       self._response['resp']['module'] = 'relation'
       self._response['resp']['class']  = 'Destroy'

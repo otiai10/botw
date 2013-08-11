@@ -1,8 +1,17 @@
+from pymongo import MongoClient
+from system import conf, util
+
+client = MongoClient(conf.mongo['host'],conf.mongo['port'])
+db = client[conf.mongo['dbname']]
+collection = db[conf.mongo['collectionname']]
+
 class ProcedureBase:
   _response = {
     'resp' : {},
     'args' : {},
   }
+
+  mcollection = collection
 
   def res_common_help(self, context):
     self._response['resp']['module'] = 'common'

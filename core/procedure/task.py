@@ -1,14 +1,9 @@
-from pymongo import MongoClient
 from system import conf, util
 from core.procedure.base import ProcedureBase
 
-client = MongoClient(conf.mongo['host'],conf.mongo['port'])
-db = client.test
-collection = db.masters
-
 class List(ProcedureBase):
   def perform(self, context):
-    master = collection.find({'name':context['user']['screen_name']})
+    master = self.mcollection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
       if len(m['tasks']) == 0:
@@ -35,7 +30,7 @@ class List(ProcedureBase):
 
 class Add(ProcedureBase):
   def perform(self, context):
-    master = collection.find({'name':context['user']['screen_name']})
+    master = self.mcollection.find({'name':context['user']['screen_name']})
     # """ print dir(master) """
     if master.count() is 1:
       m = master[0]
@@ -51,7 +46,7 @@ class Add(ProcedureBase):
       cur = old + added
 
       m['tasks'] = cur
-      collection.save(m)
+      self.mcollection.save(m)
 
       # TODO: DRY
       self._response['resp']['module'] = 'task'
@@ -72,7 +67,7 @@ class Add(ProcedureBase):
 
 class Done(ProcedureBase):
   def perform(self, context):
-    master = collection.find({'name':context['user']['screen_name']})
+    master = self.mcollection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
       tasks_from_text = util.split_by_delimiter(context['origin']['text'])
@@ -87,7 +82,7 @@ class Done(ProcedureBase):
 
       # update record
       m['tasks'] = new
-      collection.save(m)
+      self.mcollection.save(m)
 
       self._response['resp']['module'] = 'task'
       self._response['resp']['class']  = 'Done'
@@ -108,11 +103,11 @@ class Done(ProcedureBase):
 
 class Clear(ProcedureBase):
   def perform(self, context):
-    master = collection.find({'name':context['user']['screen_name']})
+    master = self.mcollection.find({'name':context['user']['screen_name']})
     if master.count() is 1:
       m = master[0]
       m['tasks'] = []
-      collection.save(m)
+      self.mcollection.save(m)
       self._response['resp']['module'] = 'task'
       self._response['resp']['class']  = 'Clear'
 
