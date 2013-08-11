@@ -23,9 +23,6 @@ def _convert_v1(tw):
     'in_reply_to_screen_name' : '',
     'id' : '',
   }
-  #for k,v in tw.items():
-  #  if k == 'retweeted' or k == 'retweet_count':
-  #    print(v)
 
   # implementation
   for k,v in result.items():
@@ -39,13 +36,22 @@ def get_timestamp(is_float=False):
     return timestamp
   return str(timestamp)
 
-def get_timestr(opt=None):
+def get_timestr(opt=None, space=True):
+  res = ''
   if opt is None:
-    return datetime.today().isoformat()
-  return str(None)
+    res = '[{d.year}/{d.month:02}/{d.day:02}/ {d.hour:02}:{d.minute:02}:{d.second:02}]'.format(d=datetime.today())
+  else:
+    res = datetime.today().isoformat()
+  if space:
+    return res + ' '
+  return res
 
 def split_by_delimiter(string):
   return re.split(delimiter, string)
 
 def join_with_knot(_list):
+  return knot.join(_list)
+
+def join_(knot, _list):
+  _list = map(lambda x: str(x), _list)
   return knot.join(_list)

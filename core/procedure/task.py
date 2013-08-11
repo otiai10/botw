@@ -31,7 +31,6 @@ class List(ProcedureBase):
 class Add(ProcedureBase):
   def perform(self, context):
     master = self.mcollection.find({'name':context['user']['screen_name']})
-    # """ print dir(master) """
     if master.count() is 1:
       m = master[0]
       old = m['tasks']
