@@ -39,7 +39,7 @@ def get_timestamp(is_float=False):
 def get_timestr(opt=None, space=True):
   res = ''
   if opt is None:
-    res = '[{d.year}/{d.month:02}/{d.day:02}/ {d.hour:02}:{d.minute:02}:{d.second:02}]'.format(d=datetime.today())
+    res = '[{d.year}/{d.month:02}/{d.day:02} {d.hour:02}:{d.minute:02}:{d.second:02}]'.format(d=datetime.today())
   else:
     res = datetime.today().isoformat()
   if space:

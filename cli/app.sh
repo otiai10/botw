@@ -14,7 +14,7 @@ if [ $# -lt 1 ]; then
 fi
 
 cur_date=`date '+%Y.%m%d'`
-log_path='log/'$cur_date'.log'
+log_path='log/stdout/'$cur_date'.log'
 
 case $1 in
   "start" )

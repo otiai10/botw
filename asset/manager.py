@@ -31,10 +31,10 @@ class Asset:
     self._text = Prcsr.process(self.__loaded_rsrc, params)
     return self
 
-  def get_text(self, opt={}):
+  def get_text(self, time_footer=False):
     if not hasattr(self, '_text'):
       self._text = self.__loaded_rsrc
-    if 'ts' in opt:
+    if time_footer:
       self.embed_debug_ts()
     return self._text
 
@@ -44,4 +44,4 @@ class Asset:
       return json.load(f)
  
   def embed_debug_ts(self):
-    self._text += ' [TS:%s]' % util.get_timestamp()
+    self._text += ' %s' % util.get_timestr(space=False)
