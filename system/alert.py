@@ -43,7 +43,7 @@ class Alert:
       print("An Error Occurred But Failed to Sending Mail...[%s]" % util.get_timestr())
       pass
     # status = conf.admin_name + conf.alert_tw_prefix + util.get_timestr() # + self.mail['body'].replace('@','@\\')
-    status = conf.admin_name + util.get_timestr() + self.mail['body'].replace('@','@\\')
+    status = conf.admin_name + ' ' + util.get_timestr() + self.mail['body'].replace('@','@\\')
     rest.statuses.update(status=status[:139])
 
   def set_params(self):

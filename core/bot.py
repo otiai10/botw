@@ -36,6 +36,9 @@ class Bot:
     if with_init_tw:
       rest.statuses.update(status=Asset('serif').load('common','Initd').get_text({'ts':True}))
     for t in tl:
+      # """ move to default logger
+      print(t)
+      # """
       tw = util.convert_twitter_format(t)
       try:
         self.tweet_by_tweet(tw)
