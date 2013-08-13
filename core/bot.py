@@ -36,6 +36,7 @@ class Bot:
     if with_init_tw:
       rest.statuses.update(status=Asset('serif').load('common','Initd').get_text(time_footer=True))
     for t in tl:
+      Logger('default').execute(t)
       tw = util.convert_twitter_format(t)
       try:
         self.tweet_by_tweet(tw)
@@ -80,7 +81,6 @@ class Bot:
 
   # core function
   def tweet_by_tweet(self, tweet):
-    Logger('default').execute(tweet)
     if self.pass_this_tw(tweet):
       return None
     context = self.interpret_this_tw(tweet)
