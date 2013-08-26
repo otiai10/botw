@@ -41,6 +41,7 @@ class Bot:
       try:
         self.tweet_by_tweet(tw)
       except:
+        Logger('error').execute(t)
         Alert(info=sys.exc_info(),twtxt=tw['text']).send_mail()
 
   def draw(self, key='all', console=False):
