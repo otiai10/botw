@@ -3,10 +3,11 @@ package hisyotan
 import "fmt"
 
 type Command interface {
-    Execute()
+	Execute()
 }
 
-type CommandRun struct {}
+type CommandRun struct{}
+
 func (cRun CommandRun) Execute() {
-    fmt.Println("This is command run")
+	fmt.Println("This is command run")
 }

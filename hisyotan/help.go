@@ -2,8 +2,8 @@ package hisyotan
 
 import "fmt"
 
-type CommandHelp struct {}
+type CommandHelp struct{}
 
 func (cHelp CommandHelp) Execute() {
-    fmt.Println("This is help")
+	fmt.Println("This is help")
 }
