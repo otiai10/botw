@@ -4,6 +4,6 @@
 
 ```sh
 % go get github.com/otiai10/hisyotan
-% hisyotan new
-% hisyotan love
+% gobotter new hisyotan
+% gobotter run hisyotan
 ```
