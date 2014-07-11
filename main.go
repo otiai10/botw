@@ -1,6 +1,6 @@
 package main
 
-import "github.com/otiai10/hisyotan/hisyotan"
+import "github.com/otiai10/gobotter/gobotter"
 import "github.com/otiai10/flagg"
 
 // import "github.com/otiai10/twistream"
@@ -11,13 +11,13 @@ func main() {
 	cmd.Execute()
 }
 
-var commandRegistry = map[string]hisyotan.Command{
-	"run":  hisyotan.CommandRun{},
-	"love": hisyotan.CommandRun{},
-	"help": hisyotan.CommandHelp{},
+var commandRegistry = map[string]gobotter.Command{
+	"run":  gobotter.CommandRun{},
+	"love": gobotter.CommandRun{},
+	"help": gobotter.CommandHelp{},
 }
 
-func getCmd(subcommand string) hisyotan.Command {
+func getCmd(subcommand string) gobotter.Command {
 	if cmd, ok := commandRegistry[subcommand]; ok {
 		return cmd
 	}

@@ -1,4 +1,4 @@
-package hisyotan
+package gobotter
 
 import "fmt"
 
