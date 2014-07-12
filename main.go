@@ -12,6 +12,7 @@ func main() {
 }
 
 var commandRegistry = map[string]gobotter.Command{
+	"new":  gobotter.CommandNew{},
 	"run":  gobotter.CommandRun{},
 	"love": gobotter.CommandRun{},
 	"help": gobotter.CommandHelp{},
