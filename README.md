@@ -1,9 +1,9 @@
-# 秘書たん
+# gobotter
 
-# セットアップ
+# Usage
 
 ```sh
-% go get github.com/otiai10/hisyotan
-% gobotter new hisyotan
-% gobotter run hisyotan
+% go get github.com/otiai10/gobotter
+% gobotter new your_bot_name
+% gobotter run your_bot_name
 ```
