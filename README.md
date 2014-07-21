@@ -1,9 +1,4 @@
-# 秘書たん
-
-# セットアップ
-
 ```sh
-% go get github.com/otiai10/hisyotan
-% gobotter new hisyotan
-% gobotter run hisyotan
+% go get github.com/otiai10/botw
+% go install github.com/otiai10/botw/cmd
 ```

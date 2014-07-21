@@ -1,4 +1,4 @@
-package gobotter
+package botw
 
 import "fmt"
 
