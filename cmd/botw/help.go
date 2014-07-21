@@ -1,4 +1,4 @@
-package botw
+package main
 
 import "fmt"
 

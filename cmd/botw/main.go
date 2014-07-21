@@ -1,6 +1,5 @@
 package main
 
-import "github.com/otiai10/botw/cmd"
 import "github.com/otiai10/flagg"
 
 // import "github.com/otiai10/twistream"
@@ -11,14 +10,14 @@ func main() {
 	cmd.Execute()
 }
 
-var commandRegistry = map[string]botw.Command{
-	"new":  botw.CommandNew{},
-	"run":  botw.CommandRun{},
-	"love": botw.CommandRun{},
-	"help": botw.CommandHelp{},
+var commandRegistry = map[string]Command{
+	"new":  CommandNew{},
+	"run":  CommandRun{},
+	"love": CommandRun{},
+	"help": CommandHelp{},
 }
 
-func getCmd(subcommand string) botw.Command {
+func getCmd(subcommand string) Command {
 	if cmd, ok := commandRegistry[subcommand]; ok {
 		return cmd
 	}
