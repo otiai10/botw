@@ -1,10 +1,15 @@
 // これは生成されたGoソース
 package main
 
-import "fmt"
 import "github.com/otiai10/botw"
 
 func main() {
-	fmt.Println("ここでbotzモジュールをつかってどうこうするわけさ")
+	// このへんconfから取得する
+	botw.InitVars(
+		"",
+		"",
+		"",
+		"",
+	)
 	botw.Serve()
 }

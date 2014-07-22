@@ -2,13 +2,34 @@ package botw
 
 import (
 	"fmt"
-	"time"
+	"github.com/otiai10/twistream"
 )
 
+var (
+	CONSUMERKEY       = ""
+	CONSUMERSECRET    = ""
+	ACCESSTOKEN       = ""
+	ACCESSTOKENSECRET = ""
+)
+
+func InitVars(ck, cs, at, as string) (e error) {
+	CONSUMERKEY = ck
+	CONSUMERSECRET = cs
+	ACCESSTOKEN = at
+	ACCESSTOKENSECRET = as
+	return
+}
+
 func Serve() {
-	// アプリケーションのmain thread
+	timeline, _ := twistream.New(
+		"https://userstream.twitter.com/1.1/user.json",
+		CONSUMERKEY,
+		CONSUMERSECRET,
+		ACCESSTOKEN,
+		ACCESSTOKENSECRET,
+	)
 	for {
-		fmt.Println(time.Now())
-		time.Sleep(1 * time.Second)
+		status := <-timeline.Listen()
+		fmt.Printf("%+v\n", status)
 	}
 }
