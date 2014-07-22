@@ -1,22 +1,33 @@
 package main
 
 import "fmt"
+import "os"
 import "os/exec"
+import "go/build"
+import "path/filepath"
+import "github.com/otiai10/flagg"
 
 type CommandNew struct{}
 
 // {hisyotan}は仮
 func (cNew CommandNew) Execute() {
-	// skeltonの内容を{src/hisyotan}にコピーする
-	cmd := exec.Command("cp", "-R",
-		// src pathとか取得せなあかんね
-		"/Users/otiai10/proj/go/src/github.com/otiai10/botw/skelton",
-		"/Users/otiai10/proj/go/src/hisyotan",
+	gopath := build.Default.GOPATH
+	appName := flagg.Arg(1)
+	appPath := filepath.Join(
+		gopath, "src",
+		filepath.Join(filepath.Split(appName)),
 	)
-	e := cmd.Run()
-	if e != nil {
-		fmt.Println(e)
+	if pkg, e := build.Import(appName, "", build.FindOnly); e == nil {
+		fmt.Println("Directory already exists at ", pkg.Dir)
 		return
 	}
-	fmt.Println("App created")
+	skelPath := filepath.Join(gopath, "src", "github.com/otiai10/botw", "skelton")
+	cmd := exec.Command("cp", "-R", skelPath, appPath)
+	cmd.Stderr = os.Stderr
+	e := cmd.Run()
+	if e != nil {
+		fmt.Println("`botw new` failed: ", e)
+		return
+	}
+	fmt.Println("New bot created at ", appPath)
 }
