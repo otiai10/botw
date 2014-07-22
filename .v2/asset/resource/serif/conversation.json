@@ -1,3 +1,0 @@
-{
-  "Echo"    : [ "This is Echo :  %{text_given} とあなたは言いました!!" ]
-}
