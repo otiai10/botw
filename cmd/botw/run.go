@@ -99,28 +99,25 @@ func (cRun CommandRun) Execute() {
 	}
 }
 
-const MAIN = `// ここのコードはrun時にapppathを解析した結果自動生成されるものなので
-// 将来的にはunkoとか書かない
-// Developerもここは全くいじらない
+const MAIN = `// AUTO GENERATED MAIN PROCESS
+// DO NOT EDIT
 package main
 
 import "github.com/otiai10/botw"
 
-// ここは{appname}
 import "{{.AppName}}/controllers"
 import "{{.AppName}}/conf"
 
 func main() {
-    botw.InitVars(
-        conf.CONSUMERKEY,
-        conf.CONSUMERSECRET,
-        conf.ACCESSTOKEN,
-        conf.ACCESSTOKENSECRET,
-    )
-    // ここ抽象的にController取れるの？
-    {{range .Controllers}}
-        botw.AppendController(&controllers.{{.}}{})
-    {{end}}
-    botw.Serve()
+	botw.InitVars(
+		conf.CONSUMERKEY,
+		conf.CONSUMERSECRET,
+		conf.ACCESSTOKEN,
+		conf.ACCESSTOKENSECRET,
+	)
+	{{range .Controllers}}
+	botw.AppendController(&controllers.{{.}}{})
+	{{end}}
+	botw.Serve()
 }
 `
