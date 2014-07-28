@@ -34,6 +34,11 @@ func (w writer) Write(b []byte) (n int, e error) {
 	return
 }
 
+type templatingParams struct {
+	AppName     string
+	Controllers []string
+}
+
 func (cRun CommandRun) Execute() {
 
 	// TODO: DRY
@@ -46,10 +51,12 @@ func (cRun CommandRun) Execute() {
 		// とりあえずぜんぶtrue
 		return true
 	}, 0)
-	// 包括的に
-	controllers := botw.GetAllControllerNames(pkgs["controllers"])
+	params := templatingParams{
+		AppName:     appName,
+		Controllers: botw.GetAllControllerNames(pkgs["controllers"]),
+	}
 	tpl, _ := template.New("tmp/main").Parse(MAIN)
-	tpl.Execute(writer{}, controllers)
+	tpl.Execute(writer{}, params)
 	fmt.Println(string(pool))
 
 	// binをビルドする
@@ -100,8 +107,8 @@ package main
 import "github.com/otiai10/botw"
 
 // ここは{appname}
-import "unko/controllers"
-import "unko/conf"
+import "{{.AppName}}/controllers"
+import "{{.AppName}}/conf"
 
 func main() {
     botw.InitVars(
@@ -111,7 +118,7 @@ func main() {
         conf.ACCESSTOKENSECRET,
     )
     // ここ抽象的にController取れるの？
-    {{range .}}
+    {{range .Controllers}}
         botw.AppendController(&controllers.{{.}}{})
     {{end}}
     botw.Serve()
