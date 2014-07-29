@@ -20,13 +20,6 @@ func InitVars(ck, cs, at, as string) (e error) {
 	return
 }
 
-type IController interface {
-	Match(status twistream.Status) bool
-	Execute(status twistream.Status)
-}
-
-var controllerRegistry = []IController{}
-
 func Serve() {
 	timeline, _ := twistream.New(
 		"https://userstream.twitter.com/1.1/user.json",
@@ -45,9 +38,4 @@ func Serve() {
 			}
 		}
 	}
-}
-
-func AppendController(controller IController) (e error) {
-	controllerRegistry = append(controllerRegistry, controller)
-	return
 }
