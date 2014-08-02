@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "bufio"
 import "os"
 import "os/exec"
 import "go/build"
@@ -17,6 +18,13 @@ func (cNew CommandNew) Execute() {
 		gopath, "src",
 		filepath.Join(filepath.Split(appName)),
 	)
+	if *flagg.Bool("force", false, "Remove existing directory") {
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Printf("Destroy and Create new `%s`? (Y/n): ", appPath)
+		if text, _ := reader.ReadString('\n'); text == "Y\n" {
+			exec.Command("rm", "-rf", appPath).Run()
+		}
+	}
 	if pkg, e := build.Import(appName, "", build.FindOnly); e == nil {
 		fmt.Println("Directory already exists at ", pkg.Dir)
 		return
