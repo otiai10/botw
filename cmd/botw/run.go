@@ -111,6 +111,7 @@ const MAIN = `// AUTO GENERATED MAIN PROCESS
 package main
 
 import "github.com/otiai10/botw"
+import "fmt"
 
 import "{{.AppName}}/controllers"
 import "{{.AppName}}/conf"
@@ -122,6 +123,9 @@ func main() {
 		conf.ACCESSTOKEN,
 		conf.ACCESSTOKENSECRET,
 	)
+    c := &botw.Controller{}
+    fmt.Println(c)
+
 	{{range .Controllers}}
 	botw.AppendController(&controllers.{{.}}{})
 	{{end}}
