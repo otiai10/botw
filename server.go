@@ -20,22 +20,32 @@ func InitVars(ck, cs, at, as string) (e error) {
 	return
 }
 
-func Serve() {
-	timeline, _ := twistream.New(
-		"https://userstream.twitter.com/1.1/user.json",
-		CONSUMERKEY,
-		CONSUMERSECRET,
-		ACCESSTOKEN,
-		ACCESSTOKENSECRET,
-	)
-	for {
-		status := <-timeline.Listen()
-		fmt.Printf("%+v\n", status)
-		for _, controller := range controllerRegistry {
-			if controller.Match(status) {
-				controller.Execute(status)
-				break
+func Serve() chan error {
+
+	terminator := make(chan error)
+
+	go func(terminator chan error) {
+		timeline, e := twistream.New(
+			"https://userstream.twitter.com/1.1/user.json",
+			CONSUMERKEY,
+			CONSUMERSECRET,
+			ACCESSTOKEN,
+			ACCESSTOKENSECRET,
+		)
+		if e != nil {
+			terminator <- e
+		}
+		for {
+			status := <-timeline.Listen()
+			fmt.Printf("%+v\n", status)
+			for _, controller := range controllerRegistry {
+				if controller.Match(status) {
+					controller.Execute(status)
+					break
+				}
 			}
 		}
-	}
+	}(terminator)
+
+	return terminator
 }

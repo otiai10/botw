@@ -57,7 +57,14 @@ func (cRun CommandRun) Execute() {
 	}
 	tpl, _ := template.New("tmp/main").Parse(MAIN)
 	tpl.Execute(writer{}, params)
-	fmt.Println(string(pool))
+
+	// ここでmain.mainのソースコードが完成したので、tmp/mainに書き込む
+	// 今あるものを消す
+	tmpMainPath := filepath.Join(appPath, "tmp", "main.go")
+	_ = os.Remove(filepath.Join(tmpMainPath))
+	// 新しくつくる
+	f, _ := os.Create(tmpMainPath)
+	f.Write(pool)
 
 	// binをビルドする
 	// go build -o /Users/otiai10/proj/go/bin/hisyotan hisyotan/tmp
@@ -118,6 +125,7 @@ func main() {
 	{{range .Controllers}}
 	botw.AppendController(&controllers.{{.}}{})
 	{{end}}
-	botw.Serve()
+	e := <- botw.Serve()
+    panic(e.Error())
 }
 `
