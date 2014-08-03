@@ -9,15 +9,21 @@ type IController interface {
 
 var controllerRegistry = []IController{}
 
-type Controller struct {}
+type Controller struct {
+	TL *twistream.Timeline
+}
+
 func (c *Controller) Match(status twistream.Status) bool {
-    return true
+	return true
 }
 func (c *Controller) Execute(status twistream.Status) {
-    // hoge
+	// hoge
 }
 func (c *Controller) Some() string {
-    return "This is Base.Some"
+	c.TL.Tweet(twistream.Status{
+		Text: "@otiai10 いぇっす",
+	})
+	return "This is Base.Some"
 }
 
 func AppendController(controller IController) (e error) {

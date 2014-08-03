@@ -111,6 +111,7 @@ const MAIN = `// AUTO GENERATED MAIN PROCESS
 package main
 
 import "github.com/otiai10/botw"
+import "github.com/otiai10/twistream"
 import "fmt"
 
 import "{{.AppName}}/controllers"
@@ -123,11 +124,20 @@ func main() {
 		conf.ACCESSTOKEN,
 		conf.ACCESSTOKENSECRET,
 	)
-    c := &botw.Controller{}
+    timeline, _ := twistream.New(
+        "https://userstream.twitter.com/1.1/user.json",
+		conf.CONSUMERKEY,
+		conf.CONSUMERSECRET,
+		conf.ACCESSTOKEN,
+		conf.ACCESSTOKENSECRET,
+    )
+    c := &botw.Controller{
+        TL: timeline,
+    }
     fmt.Println(c)
 
 	{{range .Controllers}}
-	botw.AppendController(&controllers.{{.}}{})
+	botw.AppendController(&controllers.{{.}}{c})
 	{{end}}
 	e := <- botw.Serve()
     panic(e.Error())
