@@ -13,5 +13,5 @@ func (s *Sample) Match(status twistream.Status) bool {
 }
 
 func (s *Sample) Execute(status twistream.Status) {
-	fmt.Println("XXXXXXXXXXXXXXXXXXXX")
+	fmt.Printf("------------------ IN SAMPLE -------------------\n%+v\n", status)
 }

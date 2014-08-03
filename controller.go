@@ -19,11 +19,10 @@ func (c *Controller) Match(status twistream.Status) bool {
 func (c *Controller) Execute(status twistream.Status) {
 	// hoge
 }
-func (c *Controller) Some() string {
-	c.TL.Tweet(twistream.Status{
-		Text: "@otiai10 いぇっす",
-	})
-	return "This is Base.Some"
+
+// TODO: hide `twistream` namespace from App
+func (c *Controller) Tweet(status twistream.Status) error {
+	return c.TL.Tweet(status)
 }
 
 func AppendController(controller IController) (e error) {

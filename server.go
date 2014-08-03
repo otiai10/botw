@@ -1,7 +1,6 @@
 package botw
 
 import (
-	"fmt"
 	"github.com/otiai10/twistream"
 )
 
@@ -37,7 +36,6 @@ func Serve() chan error {
 		}
 		for {
 			status := <-timeline.Listen()
-			fmt.Printf("%+v\n", status)
 			for _, controller := range controllerRegistry {
 				if controller.Match(status) {
 					controller.Execute(status)

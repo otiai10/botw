@@ -112,7 +112,6 @@ package main
 
 import "github.com/otiai10/botw"
 import "github.com/otiai10/twistream"
-import "fmt"
 
 import "{{.AppName}}/controllers"
 import "{{.AppName}}/conf"
@@ -134,7 +133,6 @@ func main() {
     c := &botw.Controller{
         TL: timeline,
     }
-    fmt.Println(c)
 
 	{{range .Controllers}}
 	botw.AppendController(&controllers.{{.}}{c})
