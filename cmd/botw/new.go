@@ -20,8 +20,8 @@ func (cNew CommandNew) Execute() {
 	)
 	if *flagg.Bool("force", false, "Remove existing directory") {
 		reader := bufio.NewReader(os.Stdin)
-		fmt.Printf("Destroy and Create new `%s`? (Y/n): ", appPath)
-		if text, _ := reader.ReadString('\n'); text == "Y\n" {
+		fmt.Printf("Destroy and Create new `%s`? (YES/n): ", appPath)
+		if text, _ := reader.ReadString('\n'); text == "YES\n" {
 			exec.Command("rm", "-rf", appPath).Run()
 		}
 	}
