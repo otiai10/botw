@@ -7,6 +7,7 @@ import "os/exec"
 import "go/build"
 import "path/filepath"
 import "github.com/otiai10/flagg"
+import "github.com/agtorre/gocolorize"
 
 type CommandNew struct{}
 
@@ -37,5 +38,12 @@ func (cNew CommandNew) Execute() {
 		fmt.Println("`botw new` failed: ", e)
 		return
 	}
-	fmt.Println("New bot created at ", appPath)
+	fmt.Printf("New bot created at %s\n", appPath)
+	fmt.Println(
+		gocolorize.NewColor("yellow").Paint(
+			"Edit",
+			filepath.Join(appPath, "conf", "tokens.go"),
+			"before `run`",
+		),
+	)
 }
