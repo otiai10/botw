@@ -35,7 +35,8 @@ func Serve() chan error {
 			terminator <- e
 		}
 		for {
-			status := <-timeline.Listen()
+			_status := <-timeline.Listen()
+			status := Status{_status}
 			for _, controller := range controllerRegistry {
 				if controller.Match(status) {
 					controller.Execute(status)
