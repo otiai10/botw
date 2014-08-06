@@ -137,7 +137,7 @@ func main() {
 	{{range .Controllers}}
 	botw.AppendController(&controllers.{{.}}{c})
 	{{end}}
-	e := <- botw.Serve()
+	e := <- botw.Serve(timeline)
     panic(e.Error())
 }
 `

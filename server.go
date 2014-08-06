@@ -19,23 +19,13 @@ func InitVars(ck, cs, at, as string) (e error) {
 	return
 }
 
-func Serve() chan error {
+func Serve(tl *twistream.Timeline) chan error {
 
 	terminator := make(chan error)
 
 	go func(terminator chan error) {
-		timeline, e := twistream.New(
-			"https://userstream.twitter.com/1.1/user.json",
-			CONSUMERKEY,
-			CONSUMERSECRET,
-			ACCESSTOKEN,
-			ACCESSTOKENSECRET,
-		)
-		if e != nil {
-			terminator <- e
-		}
 		for {
-			_status := <-timeline.Listen()
+			_status := <-tl.Listen()
 			status := Status{_status}
 			for _, controller := range controllerRegistry {
 				if controller.Match(status) {
