@@ -61,8 +61,9 @@ func (cRun CommandRun) Execute() {
 	// ここでmain.mainのソースコードが完成したので、tmp/mainに書き込む
 	// 今あるものを消す
 	tmpMainPath := filepath.Join(appPath, "tmp", "main.go")
-	_ = os.Remove(filepath.Join(tmpMainPath))
+	_ = os.Remove(tmpMainPath)
 	// 新しくつくる
+	_ = os.Mkdir(filepath.Join(appPath, "tmp"), 0755) // TODO: DRY
 	f, _ := os.Create(tmpMainPath)
 	f.Write(pool)
 
