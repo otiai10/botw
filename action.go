@@ -22,7 +22,6 @@ func (c *Action) Execute(status Status) {
 	// hoge
 }
 
-// TODO: hide `twistream` namespace from App
 func (c *Action) Tweet(status Status) error {
 	return c.TL.Tweet(status.Status)
 }

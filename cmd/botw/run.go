@@ -131,12 +131,12 @@ func main() {
 		conf.ACCESSTOKEN,
 		conf.ACCESSTOKENSECRET,
     )
-    c := &botw.Action{
+    a := &botw.Action{
         TL: timeline,
     }
 
 	{{range .Actions}}
-	botw.AppendAction(&actions.{{.}}{c})
+	botw.AppendAction(&actions.{{.}}{a})
 	{{end}}
 	e := <- botw.Serve(timeline)
     panic(e.Error())
