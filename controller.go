@@ -1,5 +1,7 @@
 package botw
 
+import "fmt"
+import "reflect"
 import "github.com/otiai10/twistream"
 
 type IController interface {
@@ -26,6 +28,9 @@ func (c *Controller) Tweet(status Status) error {
 }
 
 func AppendController(controller IController) (e error) {
+	if _, ok := controller.(IController); !ok {
+		return fmt.Errorf("%s does not implement IController", reflect.TypeOf(controller).String())
+	}
 	controllerRegistry = append(controllerRegistry, controller)
 	return
 }
