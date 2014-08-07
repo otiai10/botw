@@ -3,7 +3,7 @@ package botw
 import "go/ast"
 import "go/token"
 
-func GetAllControllerNames(pkg *ast.Package) (names []string) {
+func GetAllActionNames(pkg *ast.Package) (names []string) {
 	if pkg == nil {
 		return
 	}

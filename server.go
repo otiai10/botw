@@ -27,9 +27,9 @@ func Serve(tl *twistream.Timeline) chan error {
 		for {
 			_status := <-tl.Listen()
 			status := Status{_status}
-			for _, controller := range controllerRegistry {
-				if controller.Match(status) {
-					controller.Execute(status)
+			for _, action := range actionRegistry {
+				if action.Match(status) {
+					action.Execute(status)
 					break
 				}
 			}

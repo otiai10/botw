@@ -36,7 +36,7 @@ func (w writer) Write(b []byte) (n int, e error) {
 
 type templatingParams struct {
 	AppName     string
-	Controllers []string
+	Actions []string
 }
 
 func (cRun CommandRun) Execute() {
@@ -47,13 +47,13 @@ func (cRun CommandRun) Execute() {
 
 	appPath := filepath.Join(gopath, "src", appName)
 	// コントローラ名を取得する
-	pkgs, _ := parser.ParseDir(token.NewFileSet(), filepath.Join(appPath, "controllers"), func(f os.FileInfo) bool {
+	pkgs, _ := parser.ParseDir(token.NewFileSet(), filepath.Join(appPath, "actions"), func(f os.FileInfo) bool {
 		// とりあえずぜんぶtrue
 		return true
 	}, 0)
 	params := templatingParams{
 		AppName:     appName,
-		Controllers: botw.GetAllControllerNames(pkgs["controllers"]),
+		Actions: botw.GetAllActionNames(pkgs["actions"]),
 	}
 	tpl, _ := template.New("tmp/main").Parse(MAIN)
 	tpl.Execute(writer{}, params)
@@ -114,7 +114,7 @@ package main
 import "github.com/otiai10/botw"
 import "github.com/otiai10/twistream"
 
-import "{{.AppName}}/controllers"
+import "{{.AppName}}/actions"
 import "{{.AppName}}/conf"
 
 func main() {
@@ -131,12 +131,12 @@ func main() {
 		conf.ACCESSTOKEN,
 		conf.ACCESSTOKENSECRET,
     )
-    c := &botw.Controller{
+    c := &botw.Action{
         TL: timeline,
     }
 
-	{{range .Controllers}}
-	botw.AppendController(&controllers.{{.}}{c})
+	{{range .Actions}}
+	botw.AppendAction(&actions.{{.}}{c})
 	{{end}}
 	e := <- botw.Serve(timeline)
     panic(e.Error())
