@@ -35,7 +35,7 @@ func (w writer) Write(b []byte) (n int, e error) {
 }
 
 type templatingParams struct {
-	AppName     string
+	AppName string
 	Actions []string
 }
 
@@ -52,7 +52,7 @@ func (cRun CommandRun) Execute() {
 		return true
 	}, 0)
 	params := templatingParams{
-		AppName:     appName,
+		AppName: appName,
 		Actions: botw.GetAllActionNames(pkgs["actions"]),
 	}
 	tpl, _ := template.New("tmp/main").Parse(MAIN)
@@ -115,6 +115,7 @@ import "github.com/otiai10/botw"
 import "github.com/otiai10/twistream"
 
 import "{{.AppName}}/actions"
+import "{{.AppName}}/events"
 import "{{.AppName}}/conf"
 
 func main() {
@@ -138,7 +139,13 @@ func main() {
 	{{range .Actions}}
 	botw.AppendAction(&actions.{{.}}{a})
 	{{end}}
+
+    onStart := &events.OnStart{a}
+    onStart.Execute()
+
+    onError := &events.OnError{a}
 	e := <- botw.Serve(timeline)
+    onError.Execute(e)
     panic(e.Error())
 }
 `
