@@ -12,5 +12,5 @@ func (act *OnStart) Execute() {
 		time.Now().String()+", 起動しましたー",
 		map[string]string{},
 	)
-    act.Tweet(status)
+	act.Tweet(status)
 }
