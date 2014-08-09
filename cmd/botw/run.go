@@ -13,11 +13,6 @@ import (
 	"text/template"
 )
 
-// 開発用
-import (
-	"time"
-)
-
 type Command interface {
 	Execute()
 }
@@ -94,10 +89,6 @@ func (cRun CommandRun) Execute() {
 
 	// なんかあるまではこっちのプロセスで監視してる
 	finisher := make(chan bool)
-	go func() {
-		time.Sleep(10 * time.Second)
-		finisher <- true
-	}()
 
 	select {
 	case <-finisher:
