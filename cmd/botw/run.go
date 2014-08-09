@@ -13,11 +13,6 @@ import (
 	"text/template"
 )
 
-// 開発用
-import (
-	"time"
-)
-
 type Command interface {
 	Execute()
 }
@@ -95,16 +90,14 @@ func (cRun CommandRun) Execute() {
 	// なんかあるまではこっちのプロセスで監視してる
 	finisher := make(chan bool)
 	go func() {
-		time.Sleep(10 * time.Second)
-		finisher <- true
+		select {
+		case <-finisher:
+			cmd.Process.Kill()
+			fmt.Println("App Ended")
+			os.Exit(1)
+			return
+		}
 	}()
-
-	select {
-	case <-finisher:
-		cmd.Process.Kill()
-		fmt.Println("App Ended")
-		return
-	}
 }
 
 const MAIN = `// AUTO GENERATED MAIN PROCESS
