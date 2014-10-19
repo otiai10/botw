@@ -81,7 +81,7 @@ func (cRun CommandRun) Execute() {
 	cmd = exec.Command(binPath)
 	// 出力をこっちにする
 	cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
-	if e := cmd.Start(); e != nil {
+	if e := cmd.Run(); e != nil {
 		fmt.Println("App start failed: ", e)
 		return
 	}
