@@ -1,6 +1,6 @@
-# Install `botw` command
+# Install botw command
 ```sh
-% go install github.com/otiai10/botw/cmd/botw
+% go get github.com/otiai10/botw/cmd/botw
 ```
 
 # Create new bot
