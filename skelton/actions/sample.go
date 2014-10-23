@@ -9,7 +9,7 @@ type Sample struct {
 
 // See https://godoc.org/github.com/otiai10/twistream#Status to know Statsu structure
 func (s *Sample) Match(status botw.Status) (matched bool) {
-    matched = true
+	matched = true
 	return
 }
 
